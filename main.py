@@ -6,10 +6,6 @@ from cardiology import cardiology_content
 from pulmonology import pulmonology_content
 from neurology import neurology_content
 
-
-
-
-
 # Connect to the database
 conn = sqlite3.connect("healthcare.db")
 cursor = conn.cursor()
@@ -135,12 +131,11 @@ def get_patients_without_reports(department):
     df = pd.DataFrame(patients, columns=["Name", "National ID", "Department"])
     return df
 conn.close()
-#st.set_page_config(page_title="Healthcare System", layout="wide")
-st.set_page_config(page_title="Hospmind Clinics", page_icon="🏥", layout="wide")
+
+st.set_page_config(page_title="Hospiminds Clinics", page_icon="🏥", layout="wide")
 # Sidebar contents
 with st.sidebar:
-    st.image("hospmind.jpg", width=150)
-    st.title("HOSPMIND")
+    st.image("hospmind.jpg",width =150)
 
     st.markdown("### Departments")
     if st.button("Home"):
