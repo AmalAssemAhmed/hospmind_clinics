@@ -3,7 +3,7 @@ import sqlite3
 import pandas as pd
 from hepatology import hapatology_content
 from cardiology import cardiology_content
-from pulmonology import pulmonology_content
+#from pulmonology import pulmonology_content
 from neurology import neurology_content
 
 
@@ -240,7 +240,7 @@ if st.session_state.page == "main":
 
   col1,col2 =st.columns([1,9])
   with col1:
-    st.image("/content/drive/MyDrive/hospmind.jpg",use_container_width=False)
+    st.image("hospmind.jpg",use_container_width=False)
   with col2 :
     # Main title of the page
     st.markdown('<h1>Welcome in HOSPMIND Clinics</h1>', unsafe_allow_html=True)
@@ -268,16 +268,8 @@ if st.session_state.page == "main":
 </div>
 """, unsafe_allow_html=True)
 
-# Labels for patients information
-  #st.markdown('<div class="labels">', unsafe_allow_html=True)
-  #st.markdown(f'Patient Number: {total_patients}', unsafe_allow_html=True)
-  #st.markdown('Patient in Risk: 300', unsafe_allow_html=True)
-  #st.markdown("Patients That Haven't Created Reports: {no_completed_tests}", unsafe_allow_html=True)
-  #st.markdown('</div>', unsafe_allow_html=True)
 
-# Display logo as oval
-  #st.image(logo_path, width=300, use_container_width=False, caption="HOSPMIND Logo", output_format="PNG")
-  st.write("")
+st.write("")
   st.write("")
   st.markdown("### Quick Navigation")
   st.write("")
@@ -299,8 +291,8 @@ if st.session_state.page == "main":
   with col7:
     if st.button("Pulmonology", key="pulmonology"):
         st.success("You opened the Pulmonology Department!")
-        st.session_state.page = "pulmonology"
-        st.rerun()
+        #st.session_state.page = "pulmonology"
+        #st.rerun()
   with col8:
     if st.button("Hepatology", key="hepatology"):
         st.success("You opened the Hepatology Department!")
@@ -337,8 +329,8 @@ if st.session_state.page == "main":
 elif st.session_state.page =="cardiology":
   cardiology_content()
 
-elif st.session_state.page =="pulmonology":
-  pulmonology_content()
+#elif st.session_state.page =="pulmonology":
+  #pulmonology_content()
 elif st.session_state.page =="neurology":
   neurology_content()
 elif st.session_state.page =="hepatology":
