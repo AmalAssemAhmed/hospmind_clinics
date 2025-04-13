@@ -1,4 +1,4 @@
-def pulmonology_conten():
+def pulmonology_content():
 
   import streamlit as st
   import sqlite3
