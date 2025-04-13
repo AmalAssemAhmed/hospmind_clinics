@@ -11,5 +11,5 @@ reportlab==4.0.8
 markdown2==2.4.13
 Pillow==10.2.0
 opencv-python==4.9.0.80
-tensorflow==2.15.0
-transformers
+tensorflow==2.18.0
+transformers =2.18.0
