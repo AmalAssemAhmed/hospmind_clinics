@@ -73,27 +73,27 @@ def hapatology_content():
         
 
         # Prediction Section
-        report_text +="🔍 Prediction Result"
-        report_text +="The model predicts the **stage of cirrhosis** based on the inputs provided."
+        report_text +="🔍 Prediction Result\n"
+        report_text +="The model predicts the **stage of cirrhosis** based on the inputs provided.\n"
 
         
         if stage_label.lower() in ["no", "no cirrhosis"]:
-          report_text +="🟢 No Cirrhosis Detected"
-          report_text += "**What This Means:**"
-          report_text +="- The model predicts that the patient's liver is **healthy**."
-          report_text +="- However, regular medical check-ups are recommended."
+          report_text +="🟢 No Cirrhosis Detected\n"
+          report_text += "**What This Means:**\n"
+          report_text +="- The model predicts that the patient's liver is **healthy**.\n"
+          report_text +="- However, regular medical check-ups are recommended.\n"
       
         elif "early" in stage_label.lower():
-           report_text +="🟡 Early-stage Cirrhosis Detected"
-           report_text +="**What This Means:**"
-           report_text +="- The patient may have **early liver scarring**."
-           report_text +="- **Lifestyle changes & medical intervention** can help slow down progression."
+           report_text +="🟡 Early-stage Cirrhosis Detected\n"
+           report_text +="**What This Means:**\n"
+           report_text +="- The patient may have **early liver scarring**.\n"
+           report_text +="- **Lifestyle changes & medical intervention** can help slow down progression.\n"
       
         else:
-          report_text +="🔴 Advanced Cirrhosis Detected"
-          report_text += "**What This Means:**"
-          report_text +="- The liver shows significant **damage and scarring**."
-          report_text +="- Immediate medical attention is advised."
+          report_text +="🔴 Advanced Cirrhosis Detected\n"
+          report_text += "**What This Means:**\n"
+          report_text +="- The liver shows significant **damage and scarring**.\n"
+          report_text +="- Immediate medical attention is advised.\n"
         
 
          # Disclaimer
@@ -271,7 +271,7 @@ def hapatology_content():
   scaled_input = scaler.transform(input_data)
   prediction = model.predict(scaled_input)[0]
   stage_label = label_encoder.inverse_transform([prediction])[0]
-  report_txt = chest_xray_report(first_name, last_name, id, mobile, gender, stage_label)
+  report_txt = liver_report(first_name, last_name, id, mobile, gender, stage_label)
 
   col5,col6 =st.columns(2)
   with col5:
