@@ -139,7 +139,7 @@ conn.close()
 st.set_page_config(page_title="Hospmind Clinics", page_icon="🏥", layout="wide")
 # Sidebar contents
 with st.sidebar:
-    st.image("/content/drive/MyDrive/hospmind.jpg", width=150)
+    st.image("hospmind.jpg", width=150)
     st.title("HOSPMIND")
 
     st.markdown("### Departments")
