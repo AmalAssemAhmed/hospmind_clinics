@@ -269,7 +269,7 @@ if st.session_state.page == "main":
 """, unsafe_allow_html=True)
 
 
-st.write("")
+  st.write("")
   st.write("")
   st.markdown("### Quick Navigation")
   st.write("")
