@@ -3,7 +3,7 @@ import sqlite3
 import pandas as pd
 from hepatology import hapatology_content
 from cardiology import cardiology_content
-#from pulmonology import pulmonology_content
+from pulmonology import pulmonology_content
 from neurology import neurology_content
 
 
@@ -291,8 +291,8 @@ st.write("")
   with col7:
     if st.button("Pulmonology", key="pulmonology"):
         st.success("You opened the Pulmonology Department!")
-        #st.session_state.page = "pulmonology"
-        #st.rerun()
+        st.session_state.page = "pulmonology"
+        st.rerun()
   with col8:
     if st.button("Hepatology", key="hepatology"):
         st.success("You opened the Hepatology Department!")
@@ -329,8 +329,8 @@ st.write("")
 elif st.session_state.page =="cardiology":
   cardiology_content()
 
-#elif st.session_state.page =="pulmonology":
-  #pulmonology_content()
+elif st.session_state.page =="pulmonology":
+  pulmonology_content()
 elif st.session_state.page =="neurology":
   neurology_content()
 elif st.session_state.page =="hepatology":
