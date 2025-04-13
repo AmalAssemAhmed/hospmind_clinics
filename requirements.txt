@@ -10,6 +10,6 @@ pdfkit==1.0.0
 reportlab==4.0.8
 markdown2==2.4.13
 Pillow==10.2.0
-opencv-python==4.9.0.80
+opencv-python-headless==4.9.0.80
 tensorflow==2.18.0
-shap
+shap==0.44.1
