@@ -28,8 +28,7 @@ def hapatology_content():
   conn = sqlite3.connect("healthcare.db", check_same_thread=False)
   cursor = conn.cursor()
  
-  # Streamlit page config
-  st.set_page_config(page_title="Liver Cirrhosis Prediction", page_icon="🩺", layout="wide")
+  # Streamlit page 
   col1,col2 =st.columns([1,9]) 
   with col1:
     st.image("hospmind.jpg",use_container_width=False)  
