@@ -27,7 +27,7 @@ cursor.execute("""
         department TEXT,
         heartattack_report_pdf TEXT,
         ecg_report_pdf TEXT,
-        report_date TEXT,
+        report_date TEXT
 
     )
 """)
