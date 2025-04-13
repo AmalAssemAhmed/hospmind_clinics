@@ -1,7 +1,4 @@
-from transformers.modeling_utils import check_support_param_buffer_assignment
-
-
-def pulmonology_content(): 
+def pulmonology_conten
 
   import streamlit as st
   import sqlite3
