@@ -29,9 +29,6 @@ def pulmonology_content():
   # Connect to the database
   conn = sqlite3.connect("healthcare.db", check_same_thread=False)
   cursor = conn.cursor()
-  model_url ="https://drive.google.com/uc?export=download&id=1Cn_k6puKdA9s3Ol7C2lWeuqPw3n4HhFS"
-  gdown.download(model_url,'model.h5',quiet = False)
-  model = tf.keras.models.load_model('model.h5',compile = False)
   class_names = ['COVID19','NORMAL','PNEUMONIA','TURBERCULOSIS']
   image_path =""
   def preprocess_and_predict(image_path):
@@ -47,7 +44,7 @@ def pulmonology_content():
     img_input = np.expand_dims(img_resized, axis=0)
 
     # Model prediction
-    prediction = model.predict(img_input)
+    prediction = chest_model.predict(img_input)
     predicted_index = np.argmax(prediction)
     confidence = prediction[0][predicted_index] * 100
     predicted_label = class_names[predicted_index]
