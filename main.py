@@ -16,6 +16,8 @@ heartattack_scaler = load_heartattack_scaler()
 chest_model = load_chest_model()
 tumor_model =load_MRI_model()
 
+
+
 # Connect to the database
 conn = sqlite3.connect("healthcare.db")
 cursor = conn.cursor()
@@ -332,7 +334,7 @@ if st.session_state.page == "main":
 
 
 elif st.session_state.page =="cardiology":
-  cardiology_content()
+  cardiology_content(ecg_model,heartattack_model,heartattack_scaler)
 
 elif st.session_state.page =="pulmonology":
   pulmonology_content()
