@@ -150,9 +150,9 @@ with st.sidebar:
     if st.button("Pulmonology"):
         st.session_state.page = "pulmonology"
         st.rerun()
-    if st.button("Hepatology "):
-        st.session_state.page = "hepatology"
-        st.rerun()
+    #if st.button("Hepatology "):
+        #st.session_state.page = "hepatology"
+        #st.rerun()
 
     st.markdown("---")
     st.markdown(f"*Total Patients:* {total_patients}")
@@ -288,11 +288,11 @@ if st.session_state.page == "main":
         st.success("You opened the Pulmonology Department!")
         st.session_state.page = "pulmonology"
         st.rerun()
-  with col8:
-    if st.button("Hepatology", key="hepatology"):
-        st.success("You opened the Hepatology Department!")
-        st.session_state.page = "hepatology"
-        st.rerun()
+ # with col8:
+    #if st.button("Hepatology", key="hepatology"):
+        #st.success("You opened the Hepatology Department!")
+        #st.session_state.page = "hepatology"
+        #st.rerun()
 
   st.markdown("</div>", unsafe_allow_html=True)
 
@@ -300,7 +300,7 @@ if st.session_state.page == "main":
   # Dropdown to select the department
   department = st.selectbox(
     "Select Department",
-    ["cardiology", "neurology", "pulmonology", "hepatology"]
+    ["cardiology", "neurology", "pulmonology"]
      )
    # Button to show patients without reports in the selected department
   no_report_patient =st.button("Show Patients Without Reports",key="no_erport")
@@ -328,8 +328,8 @@ elif st.session_state.page =="pulmonology":
   pulmonology_content()
 elif st.session_state.page =="neurology":
   neurology_content()
-elif st.session_state.page =="hepatology":
-  hepatology_content()
+#elif st.session_state.page =="hepatology":
+  #hepatology_content()
 
 
 
