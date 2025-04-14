@@ -39,10 +39,7 @@ def neurology_content():
         return 0
   
 
-  #load MRI model
-  model_url ="https://drive.google.com/uc?export=download&id=1JDbvDg_jurTE6o14JH9TaVBGOTuUfDTw"
-  gdown.download(model_url,'model.h5',quiet = False)
-  model = tf.keras.models.load_model("model.h5",compile = False)
+ 
    
    #define variables
   class_names =["glioma" ,"meningioma","notumor","pituitary"]      
@@ -61,7 +58,7 @@ def neurology_content():
     img_input = np.expand_dims(img_normalized, axis=0)
 
     # Model prediction
-    prediction = model.predict(img_input)
+    prediction = tumor_model.predict(img_input)
     predicted_index = np.argmax(prediction)
     confidence = prediction[0][predicted_index] * 100
     predicted_label = class_names[predicted_index]
