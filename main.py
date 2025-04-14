@@ -238,7 +238,7 @@ if st.session_state.page == "main":
     st.image("hospmind.jpg",use_container_width=False)
   with col2 :
     # Main title of the page
-    st.markdown('<h1>Welcome in HOSPMIND Clinics</h1>', unsafe_allow_html=True)
+    st.markdown('<h1>Welcome in HOSPIMINDS Clinics</h1>', unsafe_allow_html=True)
   st.write("")
   st.write("")
 
@@ -329,7 +329,7 @@ elif st.session_state.page =="pulmonology":
 elif st.session_state.page =="neurology":
   neurology_content()
 elif st.session_state.page =="hepatology":
-  hapatology_content()
+  hepatology_content()
 
 
 
