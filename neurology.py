@@ -1,5 +1,5 @@
 
-def neurology_content(): 
+def neurology_content(tumor_model): 
 
   import streamlit as st
   import sqlite3
@@ -30,17 +30,7 @@ def neurology_content():
   # Connect to the database
   conn = sqlite3.connect("healthcare.db", check_same_thread=False)
   cursor = conn.cursor()
-  neurology_df =pd.read_sql_query("SELECT * FROM neurology_patients", conn)
-  def calculate_risk(category):
-    category = category.lower()
-    if category in ['glioma', 'meningioma', 'pituitary']:
-        return 1
-    else: 
-        return 0
   
-
- 
-   
    #define variables
   class_names =["glioma" ,"meningioma","notumor","pituitary"]      
   table = "neurology_patients" 
@@ -290,7 +280,7 @@ def neurology_content():
                
 
                 with col7:
-                   st.image(image, caption="Uploaded Image", width=600) 
+                   st.image(image, caption="Uploaded Image", use_container_width = True) 
            
                 with col8:
                    # Display bar chart
