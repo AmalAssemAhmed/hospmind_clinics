@@ -14,7 +14,7 @@ ecg_model = load_ecg_model()
 heartattack_model = load_heartattack_model()
 heartattack_scaler = load_heartattack_scaler()
 chest_model = load_chest_model()
-MRI_model =load_MRI_model()
+tumor_model =load_MRI_model()
 
 # Connect to the database
 conn = sqlite3.connect("healthcare.db")
