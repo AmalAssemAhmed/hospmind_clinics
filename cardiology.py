@@ -39,17 +39,17 @@ def cardiology_content():
 
     #load ecg model
     ecg_model_url ="https://drive.google.com/uc?export=download&id=1-8sG4Km4_t9A137oxszHbSU_c9uQzcwv"
-    gdown.download(ecg_model_url,'ecg_model.h5',quiet = False)
+    gdown.download(id ="1-8sG4Km4_t9A137oxszHbSU_c9uQzcwv",output='ecg_model.h5',quiet = False)
     ecg_model = tf.keras.models.load_model("ecg_model.h5", compile=False)
 
     #load heartattack model
     model_url ="https://drive.google.com/uc?export=download&id=1hRySDer_edAESbhe6xQfSMiZJE_7E7HS"
-    gdown.download(model_url,'model.pkl',quiet = False)
+    gdown.download(id="1hRySDer_edAESbhe6xQfSMiZJE_7E7HS",output ='model.pkl',quiet = False)
     heartattack_model = joblib.load("model.pkl")
     
     #load heartattack scaler
     scaler_url ="https://drive.google.com/uc?export=download&id=1nWdLMVKqjesyZi8ssrVZtA4VXNhmSHVy"
-    gdown.download(scaler_url,'scaler.pkl',quiet = False)
+    gdown.downloadid="1nWdLMVKqjesyZi8ssrVZtA4VXNhmSHVy",output ='scaler.pkl',quiet = False)
     heartattack_scaler = joblib.load("scaler.pkl")
 
     # Connect to the database
