@@ -268,7 +268,7 @@ def neurology_content(tumor_model):
 
            f.write(uploaded_file.getbuffer())
            predicted_label,image,prob = preprocess_and_predict(image_path)
-           risk = calculate_risk(predicted_label)
+          
            tumor_report_markdown = MRI_report(first_name, last_name, national_id, mobile, gender, predicted_label)
 
 
