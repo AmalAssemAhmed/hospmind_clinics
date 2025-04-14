@@ -36,7 +36,7 @@ def hepatology_content():
     st.title("🩺 Liver Cirrhosis Stage Prediction")
 
   # Load the model, scaler, and label encoder
-  @st.cache_resource
+ 
   def load_model_and_scaler():
     model = joblib.load("Gradient Boosting_model.pkl")
     scaler = joblib.load("scaler.pkl")
