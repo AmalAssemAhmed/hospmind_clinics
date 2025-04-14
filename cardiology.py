@@ -49,7 +49,7 @@ def cardiology_content():
     
     #load heartattack scaler
     scaler_url ="https://drive.google.com/uc?export=download&id=1nWdLMVKqjesyZi8ssrVZtA4VXNhmSHVy"
-    gdown.downloadid="1nWdLMVKqjesyZi8ssrVZtA4VXNhmSHVy",output ='scaler.pkl',quiet = False)
+    gdown.download(id="1nWdLMVKqjesyZi8ssrVZtA4VXNhmSHVy",output ='scaler.pkl',quiet = False)
     heartattack_scaler = joblib.load("scaler.pkl")
 
     # Connect to the database
