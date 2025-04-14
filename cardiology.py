@@ -1,7 +1,7 @@
 from pandas import notnull
 
 
-def cardiology_content():
+def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
     import streamlit as st
     import sqlite3
     import re
@@ -37,21 +37,7 @@ def cardiology_content():
     
     table = "cardiology_patients" 
 
-    #load ecg model
-    #ecg_model_url ="https://drive.google.com/uc?export=download&id=1-8sG4Km4_t9A137oxszHbSU_c9uQzcwv"
-    #gdown.download(id ="1-8sG4Km4_t9A137oxszHbSU_c9uQzcwv",output='ecg_model.h5',quiet = False)
-    #ecg_model = tf.keras.models.load_model("ecg_model.h5", compile=False)
-
-    #load heartattack model
-    #model_url ="https://drive.google.com/uc?export=download&id=1hRySDer_edAESbhe6xQfSMiZJE_7E7HS"
-    #gdown.download(id="1hRySDer_edAESbhe6xQfSMiZJE_7E7HS",output ='model.pkl',quiet = False)
-    #heartattack_model = joblib.load("model.pkl")
-    
-    #load heartattack scaler
-    #scaler_url ="https://drive.google.com/uc?export=download&id=1nWdLMVKqjesyZi8ssrVZtA4VXNhmSHVy"
-    #gdown.download(id="1nWdLMVKqjesyZi8ssrVZtA4VXNhmSHVy",output ='scaler.pkl',quiet = False)
-    #heartattack_scaler = joblib.load("scaler.pkl")
-
+   
     # Connect to the database
     conn = sqlite3.connect("healthcare.db", check_same_thread=False)
     cursor = conn.cursor()
