@@ -4,13 +4,10 @@ def hepatology_content():
   import re
   from reportlab.lib.utils import ImageReader
   import pandas as pd
-  import plotly.express as px
   from fpdf import FPDF
   import pdfkit
-  import shap
   import joblib
   import datetime
-  import plotly.graph_objects as go
   import numpy as np
   from reportlab.lib.utils import simpleSplit
   import markdown2
@@ -21,7 +18,8 @@ def hepatology_content():
   import cv2
   import tensorflow as tf
   from tensorflow.keras.utils import img_to_array
-  import matplotlib.pyplot as plt
+  
+  
   report_txt =None
   table = "hepatology_patients" 
   # Connect to the database
@@ -33,7 +31,7 @@ def hepatology_content():
   with col1:
     st.image("hospmind.jpg",use_container_width=False)  
   with col2:  
-    st.title("🩺 Liver Cirrhosis Stage Prediction")
+    st.title("Liver Cirrhosis Stage Prediction")
 
   # Load the model, scaler, and label encoder
  
@@ -46,7 +44,7 @@ def hepatology_content():
   model, scaler, label_encoder = load_model_and_scaler()
    
 
-  def chest_xray_report(first_name, last_name, national_id, mobile, gender, stage_label):
+  def liver_report(first_name, last_name, national_id, mobile, gender, stage_label):
        
         report_text = "## Comprehensive AI Medical Report\n\n"
 
