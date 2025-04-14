@@ -7,7 +7,7 @@ from cardiology import cardiology_content
 from pulmonology import pulmonology_content
 from neurology import neurology_content
 #import models
-from models import load_ecg_model, load_heartattack_model, load_heartattack_scaler
+from models import load_ecg_model, load_heartattack_model, load_heartattack_scaler,load_chest_model,_load_MRI_model
 
 # load_models
 ecg_model = load_ecg_model()
