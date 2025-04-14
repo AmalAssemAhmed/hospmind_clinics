@@ -528,14 +528,12 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
        image = image.resize((224,224))
        prediction,prob= predict_ecg(image)
        ecg_report_markdown = ecg_report(first_name, last_name, national_id, mobile, gender, prediction)
-   
-    with col7 :
+       with col7 :
          
          ecg_prediction = st.button("ECG Prediction", key="ecg_predict")
          if ecg_prediction:
             with col11:
               st.image(image, caption="Uploaded Image", width=450) 
-           
             with col12:
                 # Display bar chart
                 #st.subheader("Class Probabilities")
@@ -546,11 +544,9 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
                 ax.set_ylabel("Probability")
                 ax.set_title("Prediction Probabilities")
                 st.pyplot(fig)
-
             ecg_report_markdown =f"<div style = 'color : white;'>{ecg_report_markdown}</div>"
-            st.markdown(ecg_report_markdown, unsafe_allow_html=True)
-           
-         with col8 :        
+            st.markdown(ecg_report_markdown, unsafe_allow_html=True)          
+       with col8 :        
           # Button to save ECG report
           save_report = st.button("Save ECG Report", key="save_report")
           if save_report:
