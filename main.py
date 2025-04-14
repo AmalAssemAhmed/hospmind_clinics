@@ -1,7 +1,7 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
-from hepatology import hapatology_content
+from hepatology import hepatology_content
 from cardiology import cardiology_content
 from pulmonology import pulmonology_content
 from neurology import neurology_content
