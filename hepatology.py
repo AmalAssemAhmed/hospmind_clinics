@@ -1,4 +1,4 @@
-def hapatology_content():
+def hepatology_content():
   import streamlit as st
   import sqlite3
   import re
