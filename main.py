@@ -9,6 +9,9 @@ from neurology import neurology_content
 #import models
 from models import load_ecg_model, load_heartattack_model, load_heartattack_scaler,load_chest_model,load_MRI_model
 
+#page configuration
+st.set_page_config(page_title="Hospiminds Clinics", page_icon="🏥", layout="wide")
+
 # load_models
 ecg_model = load_ecg_model()
 heartattack_model = load_heartattack_model()
@@ -144,7 +147,7 @@ def get_patients_without_reports(department):
     return df
 conn.close()
 
-st.set_page_config(page_title="Hospiminds Clinics", page_icon="🏥", layout="wide")
+
 # Sidebar contents
 with st.sidebar:
     st.image("f_hospiminds.jpg",width =150)
@@ -337,9 +340,9 @@ elif st.session_state.page =="cardiology":
   cardiology_content(ecg_model,heartattack_model,heartattack_scaler)
 
 elif st.session_state.page =="pulmonology":
-  pulmonology_content()
+  pulmonology_content(chest_model)
 elif st.session_state.page =="neurology":
-  neurology_content()
+  neurology_content(tumor_model)
 #elif st.session_state.page =="hepatology":
   #hepatology_content()
 
