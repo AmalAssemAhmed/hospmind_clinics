@@ -1,10 +1,18 @@
 import streamlit as st
 import sqlite3
 import pandas as pd
+#import departments
 from hepatology import hepatology_content
 from cardiology import cardiology_content
 from pulmonology import pulmonology_content
 from neurology import neurology_content
+#import models
+from models import load_ecg_model, load_heartattack_model, load_heartattack_scaler
+
+# load_models
+ecg_model = load_ecg_model()
+heartattack_model = load_heartattack_model()
+heartattack_scaler = load_heartattack_scaler()
 
 # Connect to the database
 conn = sqlite3.connect("healthcare.db")
