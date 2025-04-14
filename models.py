@@ -29,7 +29,7 @@ def load_chest_model():
 
 #load MRI Brain tumor ray model
 @st.cache_resource
-def load_chest_model():
+def load_MRI_model():
     model_path = "MRI_mdel.h5"
     if not os.path.exists(model_path):
         url = "https://huggingface.co/AmalAssem/hospiminds_models/resolve/main/brain_tumor.h5"
