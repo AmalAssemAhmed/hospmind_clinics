@@ -13,6 +13,8 @@ from models import load_ecg_model, load_heartattack_model, load_heartattack_scal
 ecg_model = load_ecg_model()
 heartattack_model = load_heartattack_model()
 heartattack_scaler = load_heartattack_scaler()
+chest_model = load_chest_model()
+MRI_model =load_MRI_model()
 
 # Connect to the database
 conn = sqlite3.connect("healthcare.db")
@@ -143,7 +145,7 @@ conn.close()
 st.set_page_config(page_title="Hospiminds Clinics", page_icon="🏥", layout="wide")
 # Sidebar contents
 with st.sidebar:
-    st.image("hospmind.jpg",width =150)
+    st.image("f_hospiminds.jpg",width =150)
 
     st.markdown("### Departments")
     if st.button("Home"):
@@ -243,7 +245,7 @@ if st.session_state.page == "main":
 
   col1,col2 =st.columns([1,9])
   with col1:
-    st.image("hospmind.jpg",use_container_width=False)
+    st.image("f_hospiminds.jpg",use_container_width=False)
   with col2 :
     # Main title of the page
     st.markdown('<h1>Welcome in HOSPIMINDS Clinics</h1>', unsafe_allow_html=True)
