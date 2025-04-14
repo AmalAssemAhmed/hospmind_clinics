@@ -41,7 +41,7 @@ def neurology_content(tumor_model):
     img = cv2.imread(image_path)
     if img is None:
         st.warning("Error: couldn't read image:", image_path)
-        return
+        return None,None,None
 
     img =cv2.resize(img,(240,240))
     img_normalized = img / 255.0
@@ -67,7 +67,7 @@ def neurology_content(tumor_model):
         # Patient Information
         report_text += f"####  Patient Information\n"
         report_text += f"- *Name:* {first_name} {last_name if last_name else ''}\n"
-        report_text += f"- *National ID:* national_{id}\n"
+        report_text += f"- *National ID:* national_{national_id}\n"
         report_text += f"- *Mobile:* {mobile if mobile else 'Not Provided'}\n"
         report_text += f"- *Gender:* {gender if gender else 'Not Specified'}\n\n"
         report_text += "---\n"
