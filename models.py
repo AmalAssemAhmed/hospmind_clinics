@@ -71,4 +71,4 @@ def load_heartattack_scaler():
     except Exception as e:
         st.error(f"error loadig Heart Attack Scaler: {e}")
         return None
-    return scale
+    return scaler
