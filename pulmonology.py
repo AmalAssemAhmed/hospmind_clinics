@@ -202,15 +202,7 @@ def pulmonology_content(chest_model):
         background-color: #1d2b1f;
         color: #a3f7bf;
     }
-     img {
-        border-radius: 30% !important;
-        width: 120px !important;
-        height: 120px !important;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-    }
-      
+  
         </style>
         """, unsafe_allow_html=True)
   col1,col2 =st.columns([1,9]) 
