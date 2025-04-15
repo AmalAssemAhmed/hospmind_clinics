@@ -34,6 +34,8 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
     report_type =None
     patient_name =None
     result =None
+    resuly[6] =None
+    result[7]=None
     
     table = "cardiology_patients" 
 
@@ -636,7 +638,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
 
                 heartattack_path = result[6]
                 
-                st.write("Debug: result =", result[6])
+               # st.write("Debug: result =", result[6])
                # st.write("Debug: result =", result[7])
                 st.write ("Path : ",os.path.exists(heartattack_path))
                 if os.path.exists(heartattack_path) is notnull and result[6] is not None:
