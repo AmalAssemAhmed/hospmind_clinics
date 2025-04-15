@@ -34,9 +34,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
     report_type =None
     patient_name =None
     result =None
-    result[6] =None
-    result[7]=None
-    
+   
     table = "cardiology_patients" 
 
    
@@ -641,11 +639,11 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
                # st.write("Debug: result =", result[6])
                # st.write("Debug: result =", result[7])
                 st.write ("Path : ",os.path.exists(heartattack_path))
-                if os.path.exists(heartattack_path) is notnull and result[6] is not None:
+                if os.path.exists(heartattack_path) is notnull and result is not None:
                     os.remove(heartattack_path)
 
                 ecg_path = result[7]    
-                if os.path.exists(ecg_path) is notnull and result[7] is not None:
+                if os.path.exists(ecg_path) is notnull and result is not None:
                     os.remove(ecg_path)    
 
                 # Delete patient from database
