@@ -390,6 +390,14 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
         font-size: 20px;
         margin-top: 30px;
     }
+     img {
+        border-radius: 30% !important;
+        width: 120px !important;
+        height: 120px !important;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
     </style>
     """, unsafe_allow_html=True)
     department = "Cardiology"
