@@ -395,7 +395,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
     department = "Cardiology"
     logo,header =st.columns([1,9]) 
     with logo:
-      st.image("hospmind.jpg",use_container_width=False)     
+      st.image("hos(1).jpg",use_container_width=False)     
     with header :
       st.markdown('<h1 >Cardiology Department</h1>', unsafe_allow_html=True)
     # ---- Patient Information ----
