@@ -1,4 +1,4 @@
-def pulmonology_content(chest_model):
+`def pulmonology_content(chest_model):
 
   import streamlit as st
   import sqlite3
@@ -204,8 +204,8 @@ def pulmonology_content(chest_model):
     }
      img {
         border-radius: 30% !important;
-        width: 130px !important;
-        height: 130px !important;
+        width: 120px !important;
+        height: 120px !important;
         display: block;
         margin-left: auto;
         margin-right: auto;
