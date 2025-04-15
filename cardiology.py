@@ -56,13 +56,13 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
         shap_values = explainer.shap_values(scaled_data)
         return probability, shap_values
 
-    def heartattack_report(first_name, last_name, id, mobile, gender, patient_data, prediction_prob):
+    def heartattack_report(first_name, last_name, national_id, mobile, gender, patient_data, prediction_prob):
         report_text = f"###  Heart Attack Medical Report\n\n"
 
         # Patient Information
         report_text += f"####  Patient Information\n"
         report_text += f"- *Name:* {first_name} {last_name if last_name else ''}\n"
-        report_text += f"- *National ID:* {id}\n"
+        report_text += f"- *National ID:* {national_id}\n"
         report_text += f"- *Mobile:* {mobile if mobile else 'Not Provided'}\n"
         report_text += f"- *Gender:* {gender if gender else 'Not Specified'}\n\n"
 
@@ -460,7 +460,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
          patient_data_dict = dict(zip(feature_names, patient_data))  # Convert patient data to a dictionary
          shap_values_dict = dict(zip(feature_names, shap_values[0]))  # Convert SHAP values to a dictionary
 
-         heartattack_report_markdown = heartattack_report(first_name, last_name, mobile, national_id, gender,
+         heartattack_report_markdown = heartattack_report(first_name, last_name,national_id, mobile,gender,
                                                          patient_data_dict, probability * 100)
 
                                                         
