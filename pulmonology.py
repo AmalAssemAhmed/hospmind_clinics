@@ -187,10 +187,10 @@ def pulmonology_content(chest_model):
     .stButton button {
         background-color: #238636;
         color: white;
-        border-radius: 0.4rem;
+        
+        border-radius: 30%;
     }
-
-    .stButton button:hover {
+     .stButton button:hover {
         background-color: #2ea043;
         color: white;
     }
