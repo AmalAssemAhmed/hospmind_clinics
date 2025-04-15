@@ -211,7 +211,7 @@ def neurology_content(tumor_model):
         """, unsafe_allow_html=True)
   col1,col2 =st.columns([1,9]) 
   with col1:
-    st.image("hospmind.jpg",use_container_width=False)     
+    st.image("hos(1).jpg",use_container_width=False)     
   with col2 :
     st.title("Neurology Diagnosis")
   col3, col4 = st.columns(2)
