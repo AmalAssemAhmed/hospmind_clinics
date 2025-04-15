@@ -239,8 +239,8 @@ if st.session_state.page == "main":
     }
       img {
         border-radius: 30% !important;
-        width: 100px !important;
-        height: 100px !important;
+        width: 150px !important;
+        height: 150px !important;
         display: block;
         margin-left: auto;
         margin-right: auto;
