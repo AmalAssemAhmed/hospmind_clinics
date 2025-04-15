@@ -150,7 +150,7 @@ conn.close()
 
 # Sidebar contents
 with st.sidebar:
-    st.image("hos.jpg",width =150)
+    st.image("hos.png",width =150)
 
     st.markdown("### Departments")
     if st.button("Home"):
@@ -250,7 +250,7 @@ if st.session_state.page == "main":
 
   col1,col2 =st.columns([1,9])
   with col1:
-    st.image("hos.jpg",use_container_width=False)
+    st.image("hos.png",use_container_width=False)
   with col2 :
     # Main title of the page
     st.markdown('<h1>Welcome in HOSPIMINDS Clinics</h1>', unsafe_allow_html=True)
