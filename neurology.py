@@ -180,12 +180,7 @@ def neurology_content(tumor_model):
     .stNumberInput input,
     .stDateInput input,
     .stSelectbox > div > div,
-    .stButton button {
-        background-color: #21262d;
-        color: #ffffff;
-        border: 1px solid #30363d;
-    }
-
+   
     /* Buttons */
     .stButton button {
         background-color: #238636;
