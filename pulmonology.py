@@ -194,7 +194,6 @@ def pulmonology_content(chest_model):
         background-color: #2ea043;
         color: white;
     }
-
     /* Markdown links */
     a {
         color: #58a6ff;
