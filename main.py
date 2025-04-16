@@ -316,7 +316,7 @@ if st.session_state.page == "main":
   # Dropdown to select the department
   department = st.selectbox(
     "Select Department",
-    ["cardiology", "neurology", "pulmonology"]
+    ["cardiology", "neurology", "pulmonology","hepatology"]
      )
    # Button to show patients without reports in the selected department
   no_report_patient =st.button("Show Patients Without Reports",key="no_erport")
