@@ -2,7 +2,7 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 #import departments
-from hepatology import hepatology_content
+#from hepatology import hepatology_content
 from cardiology import cardiology_content
 from pulmonology import pulmonology_content
 from neurology import neurology_content
@@ -165,7 +165,8 @@ with st.sidebar:
     if st.button("Pulmonology"):
         st.session_state.page = "pulmonology"
         st.rerun()
-    #if st.button("Hepatology "):
+    if st.button("Hepatology "):
+        st.success("You opened the Hepatology Department!")
         #st.session_state.page = "hepatology"
         #st.rerun()
 
@@ -303,9 +304,9 @@ if st.session_state.page == "main":
         st.success("You opened the Pulmonology Department!")
         st.session_state.page = "pulmonology"
         st.rerun()
- # with col8:
-    #if st.button("Hepatology", key="hepatology"):
-        #st.success("You opened the Hepatology Department!")
+  with col8:
+    if st.button("Hepatology", key="hepatology"):
+        st.success("You opened the Hepatology Department!")
         #st.session_state.page = "hepatology"
         #st.rerun()
 
