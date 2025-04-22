@@ -667,7 +667,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
 
     
 # Back to Home 
-    st.wwrite("")
+    st.write("")
     col16,col17,col18 = st.columns(3)
     with col17: 
       if st.button(" 🏠 Go to home"):
