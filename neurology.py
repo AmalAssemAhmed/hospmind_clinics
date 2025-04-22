@@ -298,7 +298,7 @@ def neurology_content(tumor_model):
                 tumor_report_markdown =f"<div style = 'color : white;'>{tumor_report_markdown}</div>"
                 st.markdown(tumor_report_markdown, unsafe_allow_html=True)
            
- with col6 :        
+  with col6 :        
              # Button to save Chest X ray report
              save_report = st.button("Save AI Report", key="save_report")
              if save_report:
