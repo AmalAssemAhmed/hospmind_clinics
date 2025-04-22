@@ -458,7 +458,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
                                                          patient_data_dict, probability * 100)
 
                                                         
-    col9,col10 =st.columns(2)
+    coll9,col10 =st.columns(2)
     col5, col6 = st.columns(2)                                                     
     with col9 :                        
       heartattack_prediction = st.button("Heart attack Prediction", key="predict")
