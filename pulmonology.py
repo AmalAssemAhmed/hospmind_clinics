@@ -229,7 +229,7 @@ def pulmonology_content(chest_model):
             INSERT OR REPLACE INTO pulmonology_patients 
             (national_id, name, mobile, gender, age,department, report_date) 
             VALUES (?, ?, ?, ?, ?, ?, ?)
-        """, (national_id, patient_name, mobile, gender, age, "cardiology",
+        """, (national_id, patient_name, mobile, gender, age, "pulmonology",
               datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
             conn.commit()
             st.success("Report Generated Successfully!")
