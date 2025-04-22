@@ -35,6 +35,8 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
     patient_name =None
     result =None
     image =None
+    heartattack_path=""
+    ecg_path =""
    
     table = "cardiology_patients" 
 
@@ -580,7 +582,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
               else:
                 st.warning("please complete required data")
     st.markdown(
-        '<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
+        '<h2 >Search for a Patien</h2>', unsafe_allow_html=True)            
     
     search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
     col13,col14,col15 = st.columns(3)
@@ -594,7 +596,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
         file_path = f"reports/ecg_report_{search_id}.pdf"
         if  os.path.exists(file_path) :
             with open(file_path, "rb") as file:
-                st.download_button(label="📄 Download Report", data=file,file_name=f"ecg_report_{search_id}.pdf", mime="application/pdf")
+                st.download_button(label=" Download Report", data=file,file_name=f"ecg_report_{search_id}.pdf", mime="application/pdf")
         else:
           st.warning("No ECG Reportfound for this PatientID")
        
