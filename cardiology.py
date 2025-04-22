@@ -458,9 +458,9 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
                                                          patient_data_dict, probability * 100)
 
                                                         
-    col19,col10 =st.columns(2)
+    col7,col8 =st.columns(2)
     col5, coll6 = st.columns(2)                                                     
-    with col19 :                        
+    with col7 :                        
       heartattack_prediction = st.button("Heart attack Prediction", key="predict")
       if heartattack_prediction:
         if patient_data:
@@ -492,7 +492,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
               st.plotly_chart(fig)
         else:
           st.warning("Please,Enter all medical Data")      
-      with col10:
+      with col8:
          # Button to save ECG report
           save_report_heartattack = st.button("Save Heart Attack Report", key="save_report_heartattack")
           if save_report_heartattack:
@@ -520,7 +520,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
         '<h2 >ECG image uploader</h2>', unsafe_allow_html=True)
     
     uploaded_file = st.file_uploader("Upload ECG Image", type=["jpg", 'png', "jpeg"])
-    col19,col20 = st.columns(2)
+    col9,col10 = st.columns(2)
 
     if uploaded_file is not None:
        image = Image.open(uploaded_file)
@@ -531,7 +531,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
        
        col11,col12 =st.columns(2) 
 
-    with co119 :
+    with co19 :
          
       ecg_prediction = st.button("ECG Prediction", key="ecg_predict")
       if ecg_prediction:
@@ -552,7 +552,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
             st.markdown(ecg_report_markdown, unsafe_allow_html=True) 
           else: 
               st.warning("Pleaswe upload an ECG Image")
-    with col20 :        
+    with col10 :        
           # Button to save ECG report
           save_report = st.button("Save ECG Report", key="save_report")
           if save_report:
