@@ -254,7 +254,7 @@ def pulmonology_content(chest_model):
                                 "Confusion",
                                 "Weight Loss"
                                      ])        
-  st.write("Upload a Chest X-ray image for diagnosis.")
+  st.title("Upload a Chest X-ray image for diagnosis.")
   uploaded_file = st.file_uploader("Choose an image", type=["jpg", "png", "jpeg"])
   col5,col6 = st.columns(2)
   col7,col8 =st.columns(2)
@@ -278,7 +278,7 @@ def pulmonology_content(chest_model):
                
 
                 with col7:
-                   st.image(image, caption="Uploaded Image", width=600) 
+                   st.image(image, caption="Uploaded Image", use_container_width = True) 
            
                 with col8:
                    # Display bar chart
