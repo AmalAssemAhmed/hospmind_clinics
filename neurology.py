@@ -262,7 +262,7 @@ def neurology_content(tumor_model):
   col5,col6 = st.columns(2)
   col7,col8 =st.columns(2)
 
-   if uploaded_file is not None: 
+  if uploaded_file is not None: 
         image_path = f"temp_{uploaded_file.name}"
 
         with open(image_path, "wb") as f:
@@ -274,7 +274,7 @@ def neurology_content(tumor_model):
            tumor_report_markdown = MRI_report(first_name, last_name, national_id, mobile, gender, predicted_label)
 
 
-   with col5 :
+  with col5 :
          
               tumor_prediction = st.button("MRI Prediction", key="tumor_predict")
               if tumor_prediction:
@@ -298,7 +298,7 @@ def neurology_content(tumor_model):
                 tumor_report_markdown =f"<div style = 'color : white;'>{tumor_report_markdown}</div>"
                 st.markdown(tumor_report_markdown, unsafe_allow_html=True)
            
-  with col6 :        
+ with col6 :        
              # Button to save Chest X ray report
              save_report = st.button("Save AI Report", key="save_report")
              if save_report:
