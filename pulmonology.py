@@ -243,7 +243,7 @@ def pulmonology_content(chest_model):
         else:
             st.warning("Please complete patient personal information")
   st.markdown(
-        '<h2 >🏥 Medical Information</h2>', unsafe_allow_html=True)
+        '<h2 > Medical Information</h2>', unsafe_allow_html=True)
        
   # Symptoms selection
   symptoms = st.multiselect("Select Symptoms",
@@ -323,7 +323,7 @@ def pulmonology_content(chest_model):
                 st.warning("Please complete all required data fields.")
         else:
             st.warning("Please upload a Chest X-ray image.")
-  st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
+  st.markdown('<h2 >Search for a Patien</h2>', unsafe_allow_html=True)            
     
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
 
@@ -357,7 +357,7 @@ def pulmonology_content(chest_model):
 
   # Button for deleting patient
   with col10:
-   if st.button("🗑 Delete Patient"):
+   if st.button("Delete Patient"):
     if search_id:
      
       cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
