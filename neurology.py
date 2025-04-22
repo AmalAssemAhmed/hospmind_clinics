@@ -277,7 +277,7 @@ def neurology_content(tumor_model):
   with col5 :
          
               tumor_prediction = st.button("MRI Prediction", key="tumor_predict")
-              if tumor_prediction:
+              if tumor_prediction and uploaded_file is not None:
 
                
 
@@ -301,7 +301,7 @@ def neurology_content(tumor_model):
   with col6 :        
              # Button to save Chest X ray report
              save_report = st.button("Save AI Report", key="save_report")
-             if save_report:
+             if save_report and uploaded_file is not None:
                if national_id and patient_name and tumor_report_markdown and image_path :
                    
                     tumor_report_file = convert_markdown_to_pdf(tumor_report_markdown, national_id)
@@ -325,8 +325,9 @@ def neurology_content(tumor_model):
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
 
   MRI_search = st.button("Download Chest Report", key="MRI_search")
-
-  if MRI_search:
+  col9, col10= st.columns(2)
+   with col9:
+   if MRI_search:
     if search_id:
         try:
             cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id = ?", (search_id,))
@@ -350,7 +351,8 @@ def neurology_content(tumor_model):
         st.warning("Please enter a valid Patient ID.")
 
         # Button for deleting patient
-  elif st.button("🗑 Delete Patient"):
+ with col 10:
+  if st.button("🗑 Delete Patient"):
     if search_id: 
      
       cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
@@ -374,8 +376,8 @@ def neurology_content(tumor_model):
 
 # Add buttons to return to Clinics or Main
   st.markdown("---")
-  col9, col10 ,col11= st.columns(3)
-  with col11:
+  col11, col12,col13= st.columns(3)
+  with col13:
     if st.button(" 🏠 Go to home"):
         st.session_state.page = "main"
         st.rerun()
