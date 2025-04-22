@@ -27,7 +27,7 @@ def pulmonology_content(chest_model):
   
   table = "pulmonology_patients" 
   result = None
-  result[0] = None
+  
   # Connect to the database
   conn = sqlite3.connect("healthcare.db", check_same_thread=False)
   cursor = conn.cursor()
