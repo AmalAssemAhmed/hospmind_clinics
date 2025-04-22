@@ -319,6 +319,8 @@ def neurology_content(tumor_model):
            
                else:
                   st.warning("please complete required data")
+              else :
+                st.warning("please upload MRI Image")
 
   st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
     
@@ -351,7 +353,7 @@ def neurology_content(tumor_model):
         st.warning("Please enter a valid Patient ID.")
 
         # Button for deleting patient
- with col 10:
+  with col10:
   if st.button("🗑 Delete Patient"):
     if search_id: 
      
