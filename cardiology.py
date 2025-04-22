@@ -34,6 +34,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
     report_type =None
     patient_name =None
     result =None
+    image =None
    
     table = "cardiology_patients" 
 
