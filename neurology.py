@@ -277,7 +277,7 @@ def neurology_content(tumor_model):
     tumor_report_markdown = MRI_report(first_name, last_name, national_id, mobile, gender, predicted_label)
 
 # Prediction button
-   with col5:
+  with col5:
      tumor_prediction = st.button("MRI Prediction", key="tumor_predict")
      if tumor_prediction and uploaded_file is not None:
         with col7:
