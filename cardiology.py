@@ -634,28 +634,27 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
 
 
        
-        # Button for deleting patient
-    with col15:
-      delete_patient = st.button("🗑 Delete Patient",key ="delete_patient")  
-      if delete_patient :
+      # Button for deleting patient
+  with col15:
+    delete_patient = st.button("🗑 Delete Patient", key="delete_patient")  
+    if delete_patient:
         if search_id:    
             cursor.execute(f"SELECT * FROM {table} WHERE national_id=?", (search_id,))
             result = cursor.fetchone()
 
             if result is not None:
-
                 heartattack_path = result[6]
-                ecg_path = result[7]    
-                
-               # st.write("Debug: result =", result[6])
-               # st.write("Debug: result =", result[7])
-                st.write ("Path : ",os.path.exists(heartattack_path))
-                if os.path.exists(heartattack_path)  and heartattack_path :
+                ecg_path = result[7]
+
+                # Check and delete heartattack report
+                if heartattack_path and os.path.exists(heartattack_path):
+                    st.write("Deleting heart attack report at path:", heartattack_path)
                     os.remove(heartattack_path)
 
-               
-                if os.path.exists(ecg_path)  and ecg_path:
-                    os.remove(ecg_path)    
+                # Check and delete ecg report
+                if ecg_path and os.path.exists(ecg_path):
+                    st.write("Deleting ECG report at path:", ecg_path)
+                    os.remove(ecg_path)
 
                 # Delete patient from database
                 cursor.execute(f"DELETE FROM {table} WHERE national_id=?", (search_id,))
@@ -663,11 +662,9 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
                 st.success("✅ Patient record deleted successfully!")
             else:
                 st.error("❌ No patient found!")
-   
-
         else:
             st.warning("Please enter PatientID")
-        
+
     
 # Back to Home 
     col16,col17,col18 = st.columns(3)
