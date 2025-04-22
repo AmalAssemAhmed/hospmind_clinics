@@ -35,6 +35,7 @@ def neurology_content(tumor_model):
   class_names =["glioma" ,"meningioma","notumor","pituitary"]      
   table = "neurology_patients" 
   image_path =""
+  result = None
 
   def preprocess_and_predict(image_path):
    # Load and preprocess image
@@ -323,21 +324,31 @@ def neurology_content(tumor_model):
     
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
 
-  chest_search = st.button("download Report", key="chest_search")
+  MRI_search = st.button("Download Chest Report", key="MRI_search")
+
   if chest_search:
-    if search_id :
-     table = "neurology_patients" 
-     cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
-     result = cursor.fetchone()
-     #st.write("Debug: result =", result)
-     if result and os.path.exists(result[0]) and result[0]:
-            with open(result[0], "rb") as file:
-                st.download_button(label="📄 Download Report", data=file,file_name=f"brain_tumor_report_{search_id}.pdf", mime="application/pdf")
-       
-     else :
-        st.warning("No patient found fot this ID")       
+    if search_id:
+        try:
+            cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id = ?", (search_id,))
+            result = cursor.fetchone()
+            
+            st.write("Debug: result =", result)
+            
+            if result and result[0] and os.path.exists(result[0]):
+                with open(result[0], "rb") as file:
+                    st.download_button(
+                        label="📄 Download Report",
+                        data=file,
+                        file_name=f"chest_xray_report_{search_id}.pdf",
+                        mime="application/pdf"
+                    )
+            else:
+                st.warning("No report file found for this patient ID.")
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
     else:
-            st.warning("Please enter PatientID")
+        st.warning("Please enter a valid Patient ID.")
+
         # Button for deleting patient
   elif st.button("🗑 Delete Patient"):
     if search_id: 
