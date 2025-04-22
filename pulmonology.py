@@ -27,6 +27,7 @@ def pulmonology_content(chest_model):
   
   table = "pulmonology_patients" 
   result = None
+  result[0] = None
   # Connect to the database
   conn = sqlite3.connect("healthcare.db", check_same_thread=False)
   cursor = conn.cursor()
@@ -329,12 +330,12 @@ def pulmonology_content(chest_model):
             cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id = ?", (search_id,))
             result = cursor.fetchone()
             
-            st.write("Debug: result =", result)
+            #st.write("Debug: result =", result)
             
             if result and result[0] and os.path.exists(result[0]):
                 with open(result[0], "rb") as file:
                     st.download_button(
-                        label="📄 Download Report",
+                        label="Download Report",
                         data=file,
                         file_name=f"chest_xray_report_{search_id}.pdf",
                         mime="application/pdf"
