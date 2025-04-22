@@ -352,7 +352,7 @@ def neurology_content(tumor_model):
 
         # Button for deleting patient
   with col10:
-  if st.button("🗑 Delete Patient"):
+   if st.button("🗑 Delete Patient"):
     if search_id: 
      
       cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
