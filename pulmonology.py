@@ -26,6 +26,7 @@ def pulmonology_content(chest_model):
   import gdown
   
   table = "pulmonology_patients" 
+  result = None
   # Connect to the database
   conn = sqlite3.connect("healthcare.db", check_same_thread=False)
   cursor = conn.cursor()
@@ -271,7 +272,7 @@ def pulmonology_content(chest_model):
            xray_report_markdown = chest_xray_report(first_name, last_name, national_id, mobile, gender, predicted_label)
 
 
-        with col5 :
+  with col5 :
          
               xray_prediction = st.button("Chest X ray Prediction", key="xray_predict")
               if xray_prediction:
@@ -294,7 +295,7 @@ def pulmonology_content(chest_model):
                 xray_report_markdown =f"<div style = 'color : white;'>{xray_report_markdown}</div>"
                 st.markdown(xray_report_markdown, unsafe_allow_html=True)
            
-        with col6 :        
+  with col6 :        
              # Button to save Chest X ray report
              save_report = st.button("Save AI Report", key="save_report")
              if save_report:
@@ -327,7 +328,7 @@ def pulmonology_content(chest_model):
      cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
      result = cursor.fetchone()
      #st.write("Debug: result =", result)
-     if result and os.path.exists(result[0]) and result[0]:
+     if result  is not None and os.path.exists(result[0]) is True :
             with open(result[0], "rb") as file:
                 st.download_button(label="📄 Download Report", data=file,file_name=f"chest_xray_report_{search_id}.pdf", mime="application/pdf")
        
@@ -342,11 +343,10 @@ def pulmonology_content(chest_model):
      
       cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
       result = cursor.fetchone()
+      chest_path = result[0]
 
-      if result[0]:
-          chest_path = result[0]
-          
-          if os.path.exists(chest_path):
+      if result is not None and os.path.exists(chest_path) is TRue  :
+         
                 os.remove(chest_path)
          
                 # Delete patient from database
