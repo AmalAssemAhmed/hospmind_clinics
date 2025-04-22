@@ -520,7 +520,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
     
     uploaded_file = st.file_uploader("Upload ECG Image", type=["jpg", 'png', "jpeg"])
     
-   
+    col7,col8 = st.columns(2)
 
     if uploaded_file is not None:
        image = Image.open(uploaded_file)
@@ -528,13 +528,14 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
        image = image.resize((224,224))
        prediction,prob= predict_ecg(image)
        ecg_report_markdown = ecg_report(first_name, last_name, national_id, mobile, gender, prediction)
-       col7 ,col8 =st.columns(2) 
+       
        col11,col12 =st.columns(2) 
 
-       with col7 :
+    with col7 :
          
-         ecg_prediction = st.button("ECG Prediction", key="ecg_predict")
-         if ecg_prediction:
+      ecg_prediction = st.button("ECG Prediction", key="ecg_predict")
+      if ecg_prediction:
+          if uploaded_file is not None:
             with col11:
               st.image(image, caption="Uploaded Image", width=450) 
             with col12:
@@ -548,28 +549,33 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
                 ax.set_title("Prediction Probabilities")
                 st.pyplot(fig)
             ecg_report_markdown =f"<div style = 'color : white;'>{ecg_report_markdown}</div>"
-            st.markdown(ecg_report_markdown, unsafe_allow_html=True)          
+            st.markdown(ecg_report_markdown, unsafe_allow_html=True) 
+          else: 
+              st.warning("Pleaswe upload an ECG Image")
        with col8 :        
           # Button to save ECG report
           save_report = st.button("Save ECG Report", key="save_report")
           if save_report:
               if national_id and patient_name and ecg_report_markdown :
+                if uploaded_file is not None:
                     report_type = "ecg"
                     ecg_report_file = convert_markdown_to_pdf(ecg_report_markdown, national_id, report_type)
-                    if heartattack_report_markdown:
-                        heartattack_report_file = convert_markdown_to_pdf(ecg_report_markdown, national_id, "heart_attack")
+                    if ecg_report_markdown:
+                        ecg_report_file = convert_markdown_to_pdf(ecg_report_markdown, national_id, "heart_attack")
        
 
-                    # insert patient information and ECG REport in Cardiology table
-                    cursor.execute("""
+                         # insert patient information and ECG REport in Cardiology table
+                        cursor.execute("""
                            INSERT OR REPLACE INTO cardiology_patients 
                            (national_id, name, mobile, gender, age,department,heartattack_report_pdf,ecg_report_pdf, report_date) 
                             VALUES (?, ?, ?, ?, ?, ?, ?,?,?)
                             """, (national_id, patient_name, mobile, gender, age, "cardiology",heartattack_report_file, ecg_report_file,
                             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
               
-                    conn.commit()
-                    st.success(f"ECG Report saved successfuly at :{ecg_report_file}")
+                        conn.commit()
+                        st.success(f"ECG Report saved successfuly at :{ecg_report_file}")
+                else: 
+                    st.warning("Pleaswe upload an ECG Image") 
            
               else:
                 st.warning("please complete required data")
@@ -577,13 +583,12 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
         '<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
     
     search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
-
-    ecg_search = st.button("ECG Report", key="ecg_search")
-    heartattack_search = st.button("Heart Attack Report", key="heartattack_search")
-    delete_patient = st.button("🗑 Delete Patient",key ="delete_patient")
-    
-
-    if ecg_search :
+    col13,col14,col15 = st.columns(3)
+    with col13:
+     ecg_search = st.button("ECG Report", key="ecg_search")
+  
+     
+     if ecg_search :
       if search_id:
         '''
         file_path = f"reports/ecg_report_{search_id}.pdf"
@@ -597,7 +602,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
        
         cursor.execute(f"SELECT ecg_report_pdf FROM {table} WHERE national_id=?", (search_id,))
         result = cursor.fetchone()
-        st.write("Debug: result =", result)
+        #st.write("Debug: result =", result)
         
         if result is not None  and result[0] is not None:
             with open(result[0], "rb") as file:
@@ -609,8 +614,9 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
       
 
 
-        
-    elif heartattack_search :
+    with col14:  
+     heartattack_search = st.button("Heart Attack Report", key="heartattack_search")
+     if heartattack_search :
       if search_id: 
         cursor.execute(f"SELECT heartattack_report_pdf FROM {table} WHERE national_id=?", (search_id,))
         result = cursor.fetchone()
@@ -627,7 +633,9 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
 
        
         # Button for deleting patient
-    elif delete_patient :
+    with col15:
+      delete_patient = st.button("🗑 Delete Patient",key ="delete_patient")  
+      if delete_patient :
         if search_id:    
             cursor.execute(f"SELECT * FROM {table} WHERE national_id=?", (search_id,))
             result = cursor.fetchone()
@@ -659,8 +667,8 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
         
     
 # Back to Home 
-    col13,col14,col15 = st.columns(3)
-    with col15: 
+    col16,col17,col18 = st.columns(3)
+    with col18: 
       if st.button(" 🏠 Go to home"):
         st.session_state.page = "main"
         st.rerun()
