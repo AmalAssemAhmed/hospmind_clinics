@@ -519,8 +519,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
         '<h2 >ECG image uploader</h2>', unsafe_allow_html=True)
     
     uploaded_file = st.file_uploader("Upload ECG Image", type=["jpg", 'png', "jpeg"])
-    
-    col7,col8 = st.columns(2)
+    col19,col20 = st.columns(2)
 
     if uploaded_file is not None:
        image = Image.open(uploaded_file)
@@ -531,7 +530,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
        
        col11,col12 =st.columns(2) 
 
-    with col7 :
+    with co119 :
          
       ecg_prediction = st.button("ECG Prediction", key="ecg_predict")
       if ecg_prediction:
@@ -552,7 +551,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
             st.markdown(ecg_report_markdown, unsafe_allow_html=True) 
           else: 
               st.warning("Pleaswe upload an ECG Image")
-       with col8 :        
+       with col20 :        
           # Button to save ECG report
           save_report = st.button("Save ECG Report", key="save_report")
           if save_report:
