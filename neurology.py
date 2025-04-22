@@ -256,7 +256,7 @@ def neurology_content(tumor_model):
                                 "Confusion or disorientation",
                                 "Tremors"
                                    ])        
-  st.write("Upload MRI for diagnosis.")
+  st.title("Upload MRI for diagnosis.")
   uploaded_file = st.file_uploader("Choose an image", type=["jpg", "png", "jpeg"])
   col5,col6 = st.columns(2)
   col7,col8 =st.columns(2)
