@@ -245,7 +245,7 @@ def neurology_content(tumor_model):
         else:
             st.warning("Please complete patient personal information")
   st.markdown(
-        '<h2 >🏥 Medical Information</h2>', unsafe_allow_html=True)
+        '<h2 >Medical Information</h2>', unsafe_allow_html=True)
        
   # Symptoms selection
   symptoms = st.multiselect("Select Symptoms",
@@ -326,7 +326,7 @@ def neurology_content(tumor_model):
         else:
             st.warning("Please upload a MRI image.")
 
-  st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
+  st.markdown('<h2 >Search for a Patien</h2>', unsafe_allow_html=True)            
     
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
 
