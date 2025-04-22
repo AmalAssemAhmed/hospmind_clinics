@@ -279,7 +279,8 @@ def neurology_content(tumor_model):
 # Prediction button
   with col5:
      tumor_prediction = st.button("MRI Prediction", key="tumor_predict")
-     if tumor_prediction and uploaded_file is not None:
+     if tumor_prediction :
+      if  uploaded_file is not None:
         with col7:
             st.image(image, caption="Uploaded Image", use_container_width=True)
 
@@ -295,7 +296,7 @@ def neurology_content(tumor_model):
         # Display the report in styled HTML
         styled_report = f"<div style='color: white;'>{tumor_report_markdown}</div>"
         st.markdown(styled_report, unsafe_allow_html=True)
-    else:
+      else:
             st.warning("Please upload an MRI image.")
 
 # Save report button
