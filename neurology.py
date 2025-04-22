@@ -257,70 +257,68 @@ def neurology_content(tumor_model):
                                 "Confusion or disorientation",
                                 "Tremors"
                                    ])        
-  st.title("Upload MRI for diagnosis.")
+  st.title("Upload MRI for Diagnosis")
+
   uploaded_file = st.file_uploader("Choose an image", type=["jpg", "png", "jpeg"])
-  col5,col6 = st.columns(2)
-  col7,col8 =st.columns(2)
+  col5, col6 = st.columns(2)
+  col7, col8 = st.columns(2)
 
-  if uploaded_file is not None: 
-        image_path = f"temp_{uploaded_file.name}"
+  # Initialize report markdown
+  tumor_report_markdown = ""
 
-        with open(image_path, "wb") as f:
+  if uploaded_file is not None:
+    image_path = f"temp_{uploaded_file.name}"
 
+    with open(image_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
 
-           f.write(uploaded_file.getbuffer())
-           predicted_label,image,prob = preprocess_and_predict(image_path)
-          
-           tumor_report_markdown = MRI_report(first_name, last_name, national_id, mobile, gender, predicted_label)
+    # Predict tumor type and get report
+    predicted_label, image, prob = preprocess_and_predict(image_path)
+    tumor_report_markdown = MRI_report(first_name, last_name, national_id, mobile, gender, predicted_label)
 
+# Prediction button
+   with col5:
+     tumor_prediction = st.button("MRI Prediction", key="tumor_predict")
+     if tumor_prediction and uploaded_file is not None:
+        with col7:
+            st.image(image, caption="Uploaded Image", use_container_width=True)
 
-  with col5 :
-         
-              tumor_prediction = st.button("MRI Prediction", key="tumor_predict")
-              if tumor_prediction and uploaded_file is not None:
+        with col8:
+            class_labels = ["glioma", "meningioma", "notumor", "pituitary"]
+            fig, ax = plt.subplots()
+            bars = ax.bar(class_labels, prob, color='lightblue')
+            ax.set_ylim([0, 1])
+            ax.set_ylabel("Probability")
+            ax.set_title("Prediction Probabilities")
+            st.pyplot(fig)
 
-               
+        # Display the report in styled HTML
+        styled_report = f"<div style='color: white;'>{tumor_report_markdown}</div>"
+        st.markdown(styled_report, unsafe_allow_html=True)
 
-                with col7:
-                   st.image(image, caption="Uploaded Image", use_container_width = True) 
-           
-                with col8:
-                   # Display bar chart
-                   #st.subheader("Class Probabilities")
-                   class_labels = ["glioma" ,"meningioma","notumor","pituitary"]
-                   fig, ax = plt.subplots()
-                   bars = ax.bar(class_labels, prob, color='lightblue')
-                   ax.set_ylim([0, 1])
-                   ax.set_ylabel("Probability")
-                   ax.set_title("Prediction Probabilities")
-                   st.pyplot(fig)
+# Save report button
+  with col6:
+    save_report = st.button("Save AI Report", key="save_report")
+    if save_report:
+        if uploaded_file is not None:
+            if national_id and patient_name and tumor_report_markdown and image_path:
+                tumor_report_file = convert_markdown_to_pdf(tumor_report_markdown, national_id)
 
-                tumor_report_markdown =f"<div style = 'color : white;'>{tumor_report_markdown}</div>"
-                st.markdown(tumor_report_markdown, unsafe_allow_html=True)
-           
-  with col6 :        
-             # Button to save Chest X ray report
-             save_report = st.button("Save AI Report", key="save_report")
-             if save_report and uploaded_file is not None:
-               if national_id and patient_name and tumor_report_markdown and image_path :
-                   
-                    tumor_report_file = convert_markdown_to_pdf(tumor_report_markdown, national_id)
-          
-                    # insert patient information and ECG REport in Cardiology table
-                    cursor.execute("""
-                           INSERT OR REPLACE INTO neurology_patients 
-                           (national_id, name, mobile, gender, age,department,MRI_image,report_pdf, report_date) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?,?,?)
-                            """, (national_id, patient_name, mobile, gender, age, "Neurology",image_path,tumor_report_file, 
-                            datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-              
-                    conn.commit()
-                    st.success(f"MRI Report saved successfuly at :{tumor_report_file}")
-           
-               else:
-                  st.warning("please complete required data")
-              else :
-                st.warning("please upload MRI Image")
+                # Insert into database
+                cursor.execute("""
+                    INSERT OR REPLACE INTO neurology_patients 
+                    (national_id, name, mobile, gender, age, department, MRI_image, report_pdf, report_date) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    national_id, patient_name, mobile, gender, age, "Neurology", image_path,
+                    tumor_report_file, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                ))
+                conn.commit()
+                st.success(f"MRI Report saved successfully at: {tumor_report_file}")
+            else:
+                st.warning("Please complete all required data fields.")
+        else:
+            st.warning("Please upload an MRI image.")
 
   st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
     
