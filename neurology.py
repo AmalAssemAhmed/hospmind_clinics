@@ -295,7 +295,7 @@ def neurology_content(tumor_model):
         # Display the report in styled HTML
         styled_report = f"<div style='color: white;'>{tumor_report_markdown}</div>"
         st.markdown(styled_report, unsafe_allow_html=True)
-      else:
+    else:
             st.warning("Please upload an MRI image.")
 
 # Save report button
