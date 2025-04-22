@@ -31,7 +31,7 @@ def pulmonology_content(chest_model):
   result = None
   image = None
   pro =[]
- xray_report_markdown =""
+  xray_report_markdown =""
   
   # Connect to the database
   conn = sqlite3.connect("healthcare.db", check_same_thread=False)
