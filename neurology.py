@@ -326,7 +326,7 @@ def neurology_content(tumor_model):
 
   MRI_search = st.button("Download Chest Report", key="MRI_search")
   col9, col10= st.columns(2)
-   with col9:
+  with col9:
    if MRI_search:
     if search_id:
         try:
