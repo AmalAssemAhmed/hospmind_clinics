@@ -278,7 +278,7 @@ def pulmonology_content(chest_model):
               xray_prediction = st.button("Chest X ray Prediction", key="xray_predict")
               if xray_prediction:
                 if  uploaded_file is not None :
-                  with col7:
+                 with col7:
                      st.image(image, caption="Uploaded Image", use_container_width = True) 
            
                   with col8:
@@ -301,8 +301,9 @@ def pulmonology_content(chest_model):
              # Button to save Chest X ray report
              save_report = st.button("Save AI Report", key="save_report")
              if save_report:
-               if  uploaded_file is not None:
+              
                 if national_id and patient_name and xray_report_markdown and image_path:
+                  if  uploaded_file is not None:
                    
                     chest_report_file = convert_markdown_to_pdf(xray_report_markdown, national_id)
           
@@ -316,12 +317,12 @@ def pulmonology_content(chest_model):
               
                     conn.commit()
                     st.success(f"Chest X ray Report saved successfuly at :{chest_report_file}")
-           
+                 else :
+                    st.warning("please upload Chest X Ray image")
+               
                 else:
                   st.warning("please complete required data")
-               else :
-                  st.warning("please upload Chest X Ray image")
-               
+             
 
   st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
     
