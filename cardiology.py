@@ -551,7 +551,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
             st.markdown(ecg_report_markdown, unsafe_allow_html=True) 
           else: 
               st.warning("Pleaswe upload an ECG Image")
-       with col20 :        
+    with col20 :        
           # Button to save ECG report
           save_report = st.button("Save ECG Report", key="save_report")
           if save_report:
