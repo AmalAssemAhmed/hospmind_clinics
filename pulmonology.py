@@ -256,74 +256,68 @@ def pulmonology_content(chest_model):
                                 "Confusion",
                                 "Weight Loss"
                                      ])        
-  st.title("Upload a Chest X-ray image for diagnosis.")
+  st.title("Upload a Chest X-ray image for Diagnosis")
   uploaded_file = st.file_uploader("Choose an image", type=["jpg", "png", "jpeg"])
-  col5,col6 = st.columns(2)
-  col7,col8 =st.columns(2)
+  col5, col6 = st.columns(2)
+  col7, col8 = st.columns(2)
 
-  if uploaded_file is not None: 
-        image_path = f"temp_{uploaded_file.name}"
+  # Initialize report markdown
+  xray_report_markdown = ""
+ 
+  if uploaded_file is not None:
+    image_path = f"temp_{uploaded_file.name}"
 
-        with open(image_path, "wb") as f:
+    with open(image_path, "wb") as f:
+        f.write(uploaded_file.getbuffer())
 
+    predicted_label, image, prob = preprocess_and_predict(image_path)
+    xray_report_markdown = chest_xray_report(first_name, last_name, national_id, mobile, gender, predicted_label)
 
-           f.write(uploaded_file.getbuffer())
-           predicted_label,image,prob = preprocess_and_predict(image_path)
+  # Prediction button
+  with col5:
+    xray_prediction = st.button("Chest X-ray Prediction", key="xray_predict")
+    if xray_prediction:
+        if uploaded_file is not None:
+            with col7:
+                st.image(image, caption="Uploaded Image", use_container_width=True)
 
-           xray_report_markdown = chest_xray_report(first_name, last_name, national_id, mobile, gender, predicted_label)
+            with col8:
+                class_labels = ['COVID19', 'NORMAL', 'PNEUMONIA', 'TURBERCULOSIS']
+                fig, ax = plt.subplots()
+                bars = ax.bar(class_labels, prob, color='lightblue')
+                ax.set_ylim([0, 1])
+                ax.set_ylabel("Probability")
+                ax.set_title("Prediction Probabilities")
+                st.pyplot(fig)
 
+            styled_report = f"<div style='color: white;'>{xray_report_markdown}</div>"
+            st.markdown(styled_report, unsafe_allow_html=True)
+        else:
+            st.warning("Please upload a Chest X-ray image.")
 
-  with col5 :
-         
-              xray_prediction = st.button("Chest X ray Prediction", key="xray_predict")
-              if xray_prediction:
-                if  uploaded_file is not None :
-                 with col7:
-                     st.image(image, caption="Uploaded Image", use_container_width = True) 
-           
-                  with col8:
-                     # Display bar chart
-                     #st.subheader("Class Probabilities")
-                     class_labels = ['COVID19','NORMAL','PNEUMONIA','TURBERCULOSIS']
-                     fig, ax = plt.subplots()
-                     bars = ax.bar(class_labels, prob, color='lightblue')
-                     ax.set_ylim([0, 1])
-                     ax.set_ylabel("Probability")
-                     ax.set_title("Prediction Probabilities")
-                     st.pyplot(fig)
+  # Save report button
+  with col6:
+    save_report = st.button("Save AI Report", key="save_report")
+    if save_report:
+        if uploaded_file is not None:
+            if national_id and patient_name and xray_report_markdown and image_path:
+                chest_report_file = convert_markdown_to_pdf(xray_report_markdown, national_id)
 
-                 xray_report_markdown =f"<div style = 'color : white;'>{xray_report_markdown}</div>"
-                 st.markdown(xray_report_markdown, unsafe_allow_html=True)
-                else :
-                  st.warning("please upload Chest X Ray image")
-           
-  with col6 :        
-             # Button to save Chest X ray report
-             save_report = st.button("Save AI Report", key="save_report")
-             if save_report:
-              
-                if national_id and patient_name and xray_report_markdown and image_path:
-                  if  uploaded_file is not None:
-                   
-                    chest_report_file = convert_markdown_to_pdf(xray_report_markdown, national_id)
-          
-                    # insert patient information and ECG REport in Cardiology table
-                    cursor.execute("""
-                           INSERT OR REPLACE INTO pulmonology_patients 
-                           (national_id, name, mobile, gender, age,department,xray_image,report_pdf, report_date) 
-                            VALUES (?, ?, ?, ?, ?, ?, ?,?,?)
-                            """, (national_id, patient_name, mobile, gender, age, "Pulmnology",image_path,chest_report_file, 
-                            datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-              
-                    conn.commit()
-                    st.success(f"Chest X ray Report saved successfuly at :{chest_report_file}")
-                 else :
-                    st.warning("please upload Chest X Ray image")
-               
-                else:
-                  st.warning("please complete required data")
-             
-
+                # Save to DB
+                cursor.execute("""
+                    INSERT OR REPLACE INTO pulmonology_patients 
+                    (national_id, name, mobile, gender, age, department, xray_image, report_pdf, report_date) 
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    national_id, patient_name, mobile, gender, age, "Pulmonology", image_path,
+                    chest_report_file, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                ))
+                conn.commit()
+                st.success(f"Chest X-ray report saved successfully at: {chest_report_file}")
+            else:
+                st.warning("Please complete all required data fields.")
+        else:
+            st.warning("Please upload a Chest X-ray image.")
   st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
     
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
