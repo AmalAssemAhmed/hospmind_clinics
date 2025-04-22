@@ -635,9 +635,9 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
 
        
       # Button for deleting patient
-   with col15:
-    delete_patient = st.button("🗑 Delete Patient", key="delete_patient")  
-    if delete_patient:
+    with col15:
+     delete_patient = st.button("🗑 Delete Patient", key="delete_patient")  
+     if delete_patient:
         if search_id:    
             cursor.execute(f"SELECT * FROM {table} WHERE national_id=?", (search_id,))
             result = cursor.fetchone()
