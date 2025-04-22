@@ -321,23 +321,31 @@ def pulmonology_content(chest_model):
     
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
 
-  chest_search = st.button("download chest Report", key="chest_search")
+  chest_search = st.button("Download Chest Report", key="chest_search")
+
   if chest_search:
     if search_id:
-    
-     cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
-     result = cursor.fetchone()
-     st.write( "path :",os.path.exists(result[0]))
-     st.write("Debug: result =", result)
-    
-     if result is not None and os.path.exists(result[0]) is True and result[0]: 
-            with open(result[0], "rb") as file:
-                st.download_button(label="📄 Download Report", data=file,file_name=f"chest_xray_report_{search_id}.pdf", mime="application/pdf")
-       
-     else :
-        st.warning("No patient found fot this ID")       
+        try:
+            cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id = ?", (search_id,))
+            result = cursor.fetchone()
+            
+            st.write("Debug: result =", result)
+            
+            if result and result[0] and os.path.exists(result[0]):
+                with open(result[0], "rb") as file:
+                    st.download_button(
+                        label="📄 Download Report",
+                        data=file,
+                        file_name=f"chest_xray_report_{search_id}.pdf",
+                        mime="application/pdf"
+                    )
+            else:
+                st.warning("No report file found for this patient ID.")
+        except Exception as e:
+            st.error(f"An error occurred: {e}")
     else:
-        st.warning("Please enter PatientID") 
+        st.warning("Please enter a valid Patient ID.")
+
 
  # Button for deleting patient
   if st.button("🗑 Delete Patient"):
