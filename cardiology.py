@@ -460,7 +460,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
                                                         
     col19,col10 =st.columns(2)
     col5, coll6 = st.columns(2)                                                     
-    with  col19 :                        
+    with col19 :                        
       heartattack_prediction = st.button("Heart attack Prediction", key="predict")
       if heartattack_prediction:
         if patient_data:
