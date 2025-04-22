@@ -38,7 +38,7 @@ def neurology_content(tumor_model):
   result = None
   image = None
   pro =[]
-  xray_report_markdown =""
+  tumor_report_markdown =""
 
   def preprocess_and_predict(image_path):
    # Load and preprocess image
