@@ -459,8 +459,8 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
 
                                                         
     col19,col10 =st.columns(2)
-    col5, col6 = st.columns(2)                                                     
-    with coll9 :                        
+    col5, coll6 = st.columns(2)                                                     
+    with  col19 :                        
       heartattack_prediction = st.button("Heart attack Prediction", key="predict")
       if heartattack_prediction:
         if patient_data:
@@ -487,7 +487,7 @@ def cardiology_content(ecg_model,heartattack_model,heartattack_scaler):
                        
                         ))
               st.plotly_chart(fig_gauge)
-            with col6:
+            with coll6:
               fig = plot_patient_waterfall(feature_names, shap_values[0], probability * 100)
               st.plotly_chart(fig)
         else:
