@@ -295,6 +295,8 @@ def neurology_content(tumor_model):
         # Display the report in styled HTML
         styled_report = f"<div style='color: white;'>{tumor_report_markdown}</div>"
         st.markdown(styled_report, unsafe_allow_html=True)
+      else:
+            st.warning("Please upload an MRI image.")
 
 # Save report button
   with col6:
@@ -324,9 +326,10 @@ def neurology_content(tumor_model):
     
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
 
-  MRI_search = st.button("Download Chest Report", key="MRI_search")
+
   col9, col10= st.columns(2)
   with col9:
+   MRI_search = st.button("Download Chest Report", key="MRI_search")
    if MRI_search:
     if search_id:
         try:
