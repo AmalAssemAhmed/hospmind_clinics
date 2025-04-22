@@ -277,30 +277,32 @@ def pulmonology_content(chest_model):
          
               xray_prediction = st.button("Chest X ray Prediction", key="xray_predict")
               if xray_prediction:
-               
-
-                with col7:
-                   st.image(image, caption="Uploaded Image", use_container_width = True) 
+                if  uploaded_file is not None :
+                  with col7:
+                     st.image(image, caption="Uploaded Image", use_container_width = True) 
            
-                with col8:
-                   # Display bar chart
-                   #st.subheader("Class Probabilities")
-                   class_labels = ['COVID19','NORMAL','PNEUMONIA','TURBERCULOSIS']
-                   fig, ax = plt.subplots()
-                   bars = ax.bar(class_labels, prob, color='lightblue')
-                   ax.set_ylim([0, 1])
-                   ax.set_ylabel("Probability")
-                   ax.set_title("Prediction Probabilities")
-                   st.pyplot(fig)
+                  with col8:
+                     # Display bar chart
+                     #st.subheader("Class Probabilities")
+                     class_labels = ['COVID19','NORMAL','PNEUMONIA','TURBERCULOSIS']
+                     fig, ax = plt.subplots()
+                     bars = ax.bar(class_labels, prob, color='lightblue')
+                     ax.set_ylim([0, 1])
+                     ax.set_ylabel("Probability")
+                     ax.set_title("Prediction Probabilities")
+                     st.pyplot(fig)
 
-                xray_report_markdown =f"<div style = 'color : white;'>{xray_report_markdown}</div>"
-                st.markdown(xray_report_markdown, unsafe_allow_html=True)
+                 xray_report_markdown =f"<div style = 'color : white;'>{xray_report_markdown}</div>"
+                 st.markdown(xray_report_markdown, unsafe_allow_html=True)
+                else :
+                  st.warning("please upload Chest X Ray image")
            
   with col6 :        
              # Button to save Chest X ray report
              save_report = st.button("Save AI Report", key="save_report")
              if save_report:
-               if national_id and patient_name and xray_report_markdown and image_path :
+               if  uploaded_file is not None:
+                if national_id and patient_name and xray_report_markdown and image_path:
                    
                     chest_report_file = convert_markdown_to_pdf(xray_report_markdown, national_id)
           
@@ -315,16 +317,21 @@ def pulmonology_content(chest_model):
                     conn.commit()
                     st.success(f"Chest X ray Report saved successfuly at :{chest_report_file}")
            
-               else:
+                else:
                   st.warning("please complete required data")
+               else :
+                  st.warning("please upload Chest X Ray image")
+               
 
   st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
     
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
 
-  chest_search = st.button("Download Chest Report", key="chest_search")
-
-  if chest_search:
+ 
+  col9 ,col10= st.columns(2)
+  with col9:
+   chest_search = st.button("Download Chest Report", key="chest_search")
+   if chest_search:
     if search_id:
         try:
             cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id = ?", (search_id,))
@@ -348,8 +355,9 @@ def pulmonology_content(chest_model):
         st.warning("Please enter a valid Patient ID.")
 
 
- # Button for deleting patient
-  if st.button("🗑 Delete Patient"):
+  # Button for deleting patient
+  with col10:
+   if st.button("🗑 Delete Patient"):
     if search_id:
      
       cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
@@ -371,8 +379,8 @@ def pulmonology_content(chest_model):
 
 # Add buttons to return to Clinics or Main
   st.markdown("---")
-  col9, col10 ,col11= st.columns(3)
-  with col11:
+  col11, col12 ,col13= st.columns(3)
+  with col13:
     if st.button(" 🏠 Go to home"):
         st.session_state.page = "main"
         st.rerun()
