@@ -329,7 +329,7 @@ def pulmonology_content(chest_model):
      result = cursor.fetchone()
      st.write("Debug: result =", result)
      st.write("Debug: path =", os.path.exists(result[0]))
-     if result  is not None and os.path.exists(result[0]) is True :
+     if result[0]  is not None and os.path.exists(result[0]) is True :
             with open(result[0], "rb") as file:
                 st.download_button(label="📄 Download Report", data=file,file_name=f"chest_xray_report_{search_id}.pdf", mime="application/pdf")
        
