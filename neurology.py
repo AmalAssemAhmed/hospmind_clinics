@@ -262,7 +262,7 @@ def neurology_content(tumor_model):
   col5,col6 = st.columns(2)
   col7,col8 =st.columns(2)
 
-  if uploaded_file is not None: 
+   if uploaded_file is not None: 
         image_path = f"temp_{uploaded_file.name}"
 
         with open(image_path, "wb") as f:
