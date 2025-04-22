@@ -327,10 +327,10 @@ def pulmonology_content(chest_model):
     
      cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
      result = cursor.fetchone()
-    # st.write( "path :",os.path.exists(result[0]))
+     st.write( "path :",os.path.exists(result[0]))
      st.write("Debug: result =", result)
     
-     if result is not None and os.path.exists(result[0]) is True and result[0]: :
+     if result is not None and os.path.exists(result[0]) is True and result[0]: 
             with open(result[0], "rb") as file:
                 st.download_button(label="📄 Download Report", data=file,file_name=f"chest_xray_report_{search_id}.pdf", mime="application/pdf")
        
