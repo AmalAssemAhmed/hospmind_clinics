@@ -297,7 +297,7 @@ def neurology_content(tumor_model):
         styled_report = f"<div style='color: white;'>{tumor_report_markdown}</div>"
         st.markdown(styled_report, unsafe_allow_html=True)
       else:
-            st.warning("Please upload an MRI image.")
+            st.warning("Please upload a MRI image.")
 
 # Save report button
   with col6:
@@ -321,7 +321,7 @@ def neurology_content(tumor_model):
             else:
                 st.warning("Please complete all required data fields.")
         else:
-            st.warning("Please upload an MRI image.")
+            st.warning("Please upload a MRI image.")
 
   st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
     
