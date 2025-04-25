@@ -72,3 +72,32 @@ def load_heartattack_scaler():
         st.error(f"error loadig Heart Attack Scaler: {e}")
         return None
     return scaler
+
+
+@st.cache_resource
+def load_liver_scaler():
+    try:
+        scaler = joblib.load("scaler.pkl")
+    except Exception as e:
+        st.error(f"error loadig liver Scaler: {e}")
+        return None
+    return scaler
+
+@st.cache_resource
+def load_liver_moel():
+    try:
+       model = joblib.load("Gradient Boosting.pkl")
+    except Exception as e:
+        st.error(f"error loadig Heart Attack Scaler: {e}")
+        return None
+    return model
+
+@st.cache_resource
+def load_encoder():
+    try:
+       encoder = joblib.load("label_encoder.pkl")
+    except Exception as e:
+        st.error(f"error loadig Heart Attack Scaler: {e}")
+        return None
+    return encoder
+
