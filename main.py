@@ -321,36 +321,9 @@ if st.session_state.page == "main":
         st.session_state.page = "pulmonology"
         st.rerun()
   with col8:
-     # if st.link_button("Hepatology ","https://liver-cirrhosis-stage-prediction-project.streamlit.app/"):
-       # st.success("You opened the Hepatology Department!")
-      
-
-    st.markdown("""
-    <style>
-    .custom-link-button {
-    background-color: #238636;
-    color: white;
-    padding: 0.5em 1.5em;
-    border-radius: 30%;
-    text-decoration: none;
-    display: inline-block;
-    font-weight: bold;
-    transition: background-color 0.3s;
-    margin-top: 10px;
-}
-
-    .custom-link-button:hover {
-    background-color: #2ea043;
-    color: white;
-}
-    </style>
-
-    <a 
-    href="https://liver-cirrhosis-stage-prediction-project.streamlit.app/" 
-    target="_blank" 
-    class="custom-link-button">Hepatology
-    </a>
-    """, unsafe_allow_html=True)
+    if st.button("Go to Hepatology Department"):
+       js = "window.open('https://liver-cirrhosis-stage-prediction-project.streamlit.app/', '_blank')"
+       st.markdown(f"<script>{js}</script>", unsafe_allow_html=True)
 
   st.markdown("### Patients With No AI Reports")
   # Dropdown to select the department
