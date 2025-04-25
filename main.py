@@ -2,12 +2,12 @@ import streamlit as st
 import sqlite3
 import pandas as pd
 #import departments
-from hepatology import hepatology_content
+#from hepatology import hepatology_content
 from cardiology import cardiology_content
 from pulmonology import pulmonology_content
 from neurology import neurology_content
 #import models
-from models import load_ecg_model, load_heartattack_model, load_heartattack_scaler,load_chest_model,load_MRI_model,load_liver_model,load_liver_scaler,load_encoder
+from models import load_ecg_model, load_heartattack_model, load_heartattack_scaler,load_chest_model,load_MRI_model
 
 #page configuration
 st.set_page_config(page_title="Hospiminds Clinics", page_icon="🏥", layout="wide")
@@ -18,9 +18,9 @@ heartattack_model = load_heartattack_model()
 heartattack_scaler = load_heartattack_scaler()
 chest_model = load_chest_model()
 tumor_model =load_MRI_model()
-liver_model =load_liver_model()
-liver_scaler =load_liver_scaler()
-liver_encoder =load_encoder()
+#liver_model =load_liver_model()
+#liver_scaler =load_liver_scaler()
+#liver_encoder =load_encoder()
 
 
 
@@ -173,8 +173,8 @@ with st.sidebar:
         st.rerun()
     if st.button("Hepatology "):
         st.success("You opened the Hepatology Department!")
-        st.session_state.page = "hepatology"
-        st.rerun()
+        #st.session_state.page = "hepatology"
+        #st.rerun()
 
     st.markdown("---")
     st.markdown(f"*Total Patients:* {total_patients}")
@@ -313,8 +313,8 @@ if st.session_state.page == "main":
   with col8:
     if st.button("Hepatology", key="hepatology"):
         st.success("You opened the Hepatology Department!")
-        st.session_state.page = "hepatology"
-        st.rerun()
+        #st.session_state.page = "hepatology"
+        #st.rerun()
 
   st.markdown("</div>", unsafe_allow_html=True)
 
@@ -350,8 +350,8 @@ elif st.session_state.page =="pulmonology":
   pulmonology_content(chest_model)
 elif st.session_state.page =="neurology":
   neurology_content(tumor_model)
-elif st.session_state.page =="hepatology":
-  hepatology_content(liver_model,liver_scaler,liver_encoder)
+#elif st.session_state.page =="hepatology":
+ # hepatology_content(liver_model,liver_scaler,liver_encoder)
 
 
 
