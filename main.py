@@ -311,8 +311,12 @@ if st.session_state.page == "main":
         st.session_state.page = "pulmonology"
         st.rerun()
   with col8:
-    if st.button("Hepatology", key="hepatology"):
+      if st.link_button("Hepatology ","https://liver-cirrhosis-stage-prediction-project.streamlit.app/"):
         st.success("You opened the Hepatology Department!")
+        #st.session_state.page = "hepatology"
+        #st.rerun()
+    #if st.button("Hepatology", key="hepatology"):
+       # st.success("You opened the Hepatology Department!")
         #st.session_state.page = "hepatology"
         #st.rerun()
 
