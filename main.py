@@ -171,8 +171,25 @@ with st.sidebar:
     if st.button("Pulmonology"):
         st.session_state.page = "pulmonology"
         st.rerun()
-    if st.link_button("Hepatology ","https://liver-cirrhosis-stage-prediction-project.streamlit.app/"):
-        st.success("You opened the Hepatology Department!")
+      
+
+    st.markdown("""
+      <a href="https://liver-cirrhosis-stage-prediction-project.streamlit.app/" target="_blank">
+        <button style="
+            background-color: #238636;
+            color: white;
+            padding: 0.5em 1.5em;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        ">
+            Go to Hepatology Department
+        </button>
+      </a>
+    """, unsafe_allow_html=True)  
+    #if st.link_button("Hepatology ","https://liver-cirrhosis-stage-prediction-project.streamlit.app/"):
+       # st.success("You opened the Hepatology Department!")
         #st.session_state.page = "hepatology"
         #st.rerun()
 
