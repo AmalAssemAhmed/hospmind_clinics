@@ -1,4 +1,4 @@
-def hepatology ():
+def hepatology (liver_model,liver_scaler,liver_encoder):
     
   import streamlit as st
   import sqlite3
@@ -53,13 +53,13 @@ def hepatology ():
 
 # Load the model, scaler, and label encoder
 
-  def load_model_and_scaler():
-    model = joblib.load("Gradient Boosting_model.pkl")
-    scaler = joblib.load("scaler.pkl")
-    label_encoder = joblib.load("label_encoder.pkl")
-    return model, scaler, label_encoder
+  #def load_model_and_scaler():
+   # model = joblib.load("Gradient Boosting_model.pkl")
+    #scaler = joblib.load("scaler.pkl")
+    #label_encoder = joblib.load("label_encoder.pkl")
+   # return model, scaler, label_encoder
 
-  model, scaler, label_encoder = load_model_and_scaler()
+ # model, scaler, label_encoder = load_model_and_scaler()
 
 
   def liver_report(first_name, last_name, national_id, mobile, gender, stage_label):
@@ -283,9 +283,9 @@ def hepatology ():
   input_data = pd.DataFrame([[hepatomegaly, edema, bilirubin, albumin, platelets, prothrombin, N_Years]],
                                columns=["Hepatomegaly", "Edema", "Bilirubin", "Albumin", "Platelets", "Prothrombin", "N_Years"])
 
-  scaled_input = scaler.transform(input_data)
-  prediction = model.predict(scaled_input)[0]
-  stage_label = label_encoder.inverse_transform([prediction])[0]
+  scaled_input = liver_scaler.transform(input_data)
+  prediction =liver_ model.predict(scaled_input)[0]
+  stage_label = liver_encoder.inverse_transform([prediction])[0]
   report_txt = liver_report(first_name, last_name, national_id, mobile, gender, stage_label)
 
   col5,col6 =st.columns(2)
