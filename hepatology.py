@@ -378,19 +378,19 @@ def hepatology_content (liver_model,liver_scaler,liver_encoder):
         #st.success("You opened  Home Page!")
        # st.session_state.page = "main"
         #st.rerun()
-
-
-     st.markdown("""
-         <a href="https://hospiminds-clinics.streamlit.app/" target="_blank">
+      st.markdown("""
+          <a 
+         href="https://hospiminds-clinics.streamlit.app/" 
+         target="_blank">
             <button style="
             background-color: #238636;
-        color: white;
-        border-radius: 0.4rem;
-        ">
+            color: white;
+            border-radius: 0.4rem;
+           ">
              🏠 Go to home
-        </button>
-    </a>
-""", unsafe_allow_html=True)
+          </button>
+        </a>
+      """, unsafe_allow_html=True)
    
    
 
