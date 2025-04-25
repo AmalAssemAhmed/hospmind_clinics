@@ -18,6 +18,12 @@ heartattack_model = load_heartattack_model()
 heartattack_scaler = load_heartattack_scaler()
 chest_model = load_chest_model()
 tumor_model =load_MRI_model()
+liver_model =load_liver_model()
+liver_scaler =load_liver_scaler()
+liver_encoder =load_encoderl()
+
+
+
 
 
 
@@ -345,7 +351,7 @@ elif st.session_state.page =="pulmonology":
 elif st.session_state.page =="neurology":
   neurology_content(tumor_model)
 elif st.session_state.page =="hepatology":
-  hepatology_content()
+  hepatology_content(liver_model,liver_scaler,liver_encoder)
 
 
 
