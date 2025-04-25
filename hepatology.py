@@ -1,4 +1,4 @@
-def hepatology (liver_model,liver_scaler,liver_encoder):
+def hepatology_content (liver_model,liver_scaler,liver_encoder):
     
   import streamlit as st
   import sqlite3
