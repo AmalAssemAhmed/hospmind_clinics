@@ -345,7 +345,11 @@ if st.session_state.page == "main":
 }
     </style>
 
-    <a href="https://liver-cirrhosis-stage-prediction-project.streamlit.app/" target="_blank" class="custom-link-button">Hepatology</a>
+    <a 
+    href="https://liver-cirrhosis-stage-prediction-project.streamlit.app/" 
+    target="_blank" 
+    class="custom-link-button">Hepatology
+    </a>
     """, unsafe_allow_html=True)
 
   st.markdown("### Patients With No AI Reports")
