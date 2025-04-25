@@ -374,10 +374,24 @@ def hepatology_content (liver_model,liver_scaler,liver_encoder):
   st.markdown("---")
   col9, col10 ,col11= st.columns(3)
   with col11:
-    if st.button(" 🏠 Go to home"):
-        st.success("You opened  Home Page!")
-        st.session_state.page = "main"
-        st.rerun()
+    #if st.button(" 🏠 Go to home"):
+        #st.success("You opened  Home Page!")
+       # st.session_state.page = "main"
+        #st.rerun()
+
+
+     st.markdown("""
+         <a href="https://hospiminds-clinics.streamlit.app/" target="_blank">
+            <button style="
+            background-color: #238636;
+        color: white;
+        border-radius: 0.4rem;
+        ">
+             🏠 Go to home
+        </button>
+    </a>
+""", unsafe_allow_html=True)
+   
    
 
 
