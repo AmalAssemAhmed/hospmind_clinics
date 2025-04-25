@@ -178,11 +178,7 @@ with st.sidebar:
         <button style="
             background-color: #238636;
             color: white;
-            padding: 0.5em 1.5em;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
+            border-radius: 30%;
         ">
             Go to Hepatology Department
         </button>
@@ -343,13 +339,9 @@ if st.session_state.page == "main":
         <button style="
             background-color: #238636;
             color: white;
-            padding: 0.5em 1.5em;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            cursor: pointer;
+            border-radius: 30%;
         ">
-            Go to Hepatology Department
+            Hepatology
         </button>
     </a>
 """, unsafe_allow_html=True)
