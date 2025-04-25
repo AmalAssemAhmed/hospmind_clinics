@@ -284,7 +284,7 @@ def hepatology (liver_model,liver_scaler,liver_encoder):
                                columns=["Hepatomegaly", "Edema", "Bilirubin", "Albumin", "Platelets", "Prothrombin", "N_Years"])
 
   scaled_input = liver_scaler.transform(input_data)
-  prediction =liver_ model.predict(scaled_input)[0]
+  prediction =liver_model.predict(scaled_input)[0]
   stage_label = liver_encoder.inverse_transform([prediction])[0]
   report_txt = liver_report(first_name, last_name, national_id, mobile, gender, stage_label)
 
