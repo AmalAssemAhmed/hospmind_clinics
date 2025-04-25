@@ -323,7 +323,7 @@ if st.session_state.page == "main":
   with col8:
      # if st.link_button("Hepatology ","https://liver-cirrhosis-stage-prediction-project.streamlit.app/"):
        # st.success("You opened the Hepatology Department!")
-      import streamlit as st
+      
 
     st.markdown("""
     <style>
