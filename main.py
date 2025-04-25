@@ -7,7 +7,7 @@ from cardiology import cardiology_content
 from pulmonology import pulmonology_content
 from neurology import neurology_content
 #import models
-from models import load_ecg_model, load_heartattack_model, load_heartattack_scaler,load_chest_model,load_MRI_model
+from models import load_ecg_model, load_heartattack_model, load_heartattack_scaler,load_chest_model,load_MRI_model,load_liver_model,load_liver_scaler,load_encoder
 
 #page configuration
 st.set_page_config(page_title="Hospiminds Clinics", page_icon="🏥", layout="wide")
@@ -20,7 +20,7 @@ chest_model = load_chest_model()
 tumor_model =load_MRI_model()
 liver_model =load_liver_model()
 liver_scaler =load_liver_scaler()
-liver_encoder =load_encoderl()
+liver_encoder =load_encoder()
 
 
 
