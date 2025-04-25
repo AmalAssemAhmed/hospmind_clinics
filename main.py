@@ -171,7 +171,7 @@ with st.sidebar:
     if st.button("Pulmonology"):
         st.session_state.page = "pulmonology"
         st.rerun()
-    if st.button("Hepatology "):
+    if st.link_button("Hepatology ","https://liver-cirrhosis-stage-prediction-project.streamlit.app/")
         st.success("You opened the Hepatology Department!")
         #st.session_state.page = "hepatology"
         #st.rerun()
