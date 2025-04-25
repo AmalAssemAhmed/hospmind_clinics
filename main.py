@@ -321,10 +321,22 @@ if st.session_state.page == "main":
         st.session_state.page = "pulmonology"
         st.rerun()
   with col8:
-    if st.button("Go to Hepatology Department"):
-       js = "window.open('https://liver-cirrhosis-stage-prediction-project.streamlit.app/', '_blank')"
-       st.markdown(f"<script>{js}</script>", unsafe_allow_html=True)
-
+    st.markdown("""
+    <a href="https://liver-cirrhosis-stage-prediction-project.streamlit.app/" target="_blank">
+        <button style="
+            background-color: #238636;
+            color: white;
+            padding: 0.5em 1.5em;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        ">
+            Go to Hepatology Department
+        </button>
+    </a>
+""", unsafe_allow_html=True)
+      
   st.markdown("### Patients With No AI Reports")
   # Dropdown to select the department
   department = st.selectbox(
