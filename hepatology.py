@@ -1,4 +1,5 @@
-def hepatology_content():
+def hepatology ():
+    
   import streamlit as st
   import sqlite3
   import re
@@ -18,23 +19,40 @@ def hepatology_content():
   import cv2
   import tensorflow as tf
   from tensorflow.keras.utils import img_to_array
-  
+
   
   report_txt =None
-  table = "hepatology_patients" 
+  table = "hepatology_patients"
+  result =None
   # Connect to the database
-  conn = sqlite3.connect("healthcare.db", check_same_thread=False)
+  conn = sqlite3.connect("liver.db", check_same_thread=False)
   cursor = conn.cursor()
- 
-  # Streamlit page 
-  col1,col2 =st.columns([1,9]) 
+  cursor.execute("""
+    CREATE TABLE IF NOT EXISTS hepatology_patients (
+        national_id TEXT PRIMARY KEY,
+        name TEXT,
+        mobile TEXT,
+        gender TEXT,
+        age INTEGER,
+        department TEXT,
+
+        report_pdf TEXT,
+        report_date TEXT
+    )
+""")
+  conn.commit()
+
+
+
+ # Streamlit page
+  col1,col2 =st.columns([1,9])
   with col1:
-    st.image("hospmind.jpg",use_container_width=False)  
-  with col2:  
+    st.image("hos.png")
+  with col2:
     st.title("Liver Cirrhosis Stage Prediction")
 
-  # Load the model, scaler, and label encoder
- 
+# Load the model, scaler, and label encoder
+
   def load_model_and_scaler():
     model = joblib.load("Gradient Boosting_model.pkl")
     scaler = joblib.load("scaler.pkl")
@@ -42,10 +60,10 @@ def hepatology_content():
     return model, scaler, label_encoder
 
   model, scaler, label_encoder = load_model_and_scaler()
-   
+
 
   def liver_report(first_name, last_name, national_id, mobile, gender, stage_label):
-       
+
         report_text = "## Comprehensive AI Medical Report\n\n"
 
         # Patient Information
@@ -64,43 +82,42 @@ def hepatology_content():
             report_text += "No significant symptoms\n\n"
         report_text += "### 🔍 Classification\n"
         report_text += f"The Chest X ray was classified into the *{prediction}* category."
-        
+
 
         report_text += "---\n"
-        
+
 
         # Prediction Section
         report_text +="🔍 Prediction Result\n"
         report_text +="The model predicts the **stage of cirrhosis** based on the inputs provided.\n"
+        stage_label = str(stage_label)
 
-        
         if stage_label.lower() in ["no", "no cirrhosis"]:
           report_text +="🟢 No Cirrhosis Detected\n"
           report_text += "**What This Means:**\n"
           report_text +="- The model predicts that the patient's liver is **healthy**.\n"
           report_text +="- However, regular medical check-ups are recommended.\n"
-      
-        elif "early" in stage_label.lower():
+
+        elif stage_label.lower() in ["early"]:
            report_text +="🟡 Early-stage Cirrhosis Detected\n"
            report_text +="**What This Means:**\n"
            report_text +="- The patient may have **early liver scarring**.\n"
            report_text +="- **Lifestyle changes & medical intervention** can help slow down progression.\n"
-      
+
         else:
           report_text +="🔴 Advanced Cirrhosis Detected\n"
           report_text += "**What This Means:**\n"
           report_text +="- The liver shows significant **damage and scarring**.\n"
           report_text +="- Immediate medical attention is advised.\n"
-        
+
 
          # Disclaimer
         report_text += "---\n"
         report_text += "### 🔍 Additional Notes\n"
         report_text += "This report provides an *initial assessment* based on the patient's input data and does not constitute a final diagnosis. A specialist consultation is recommended for a thorough medical evaluation.\n"
 
-    
-        return report_text 
 
+        return report_text
   def convert_markdown_to_pdf(report_markdown, national_id):
         os.makedirs("reports", exist_ok=True)  # Ensure the reports directory exists
         output_path = os.path.join("reports", f"liver_report_{national_id}.pdf")
@@ -151,8 +168,8 @@ def hepatology_content():
             y_position -= 20
 
         c.save()
-        return output_path   
-   
+        return output_path
+
   # Apply Dark Theme using custom CSS
   dark_theme_css = """
   <style>
@@ -207,7 +224,7 @@ def hepatology_content():
 
         first_name = st.text_input("First Name (required)", key="first_name")
         last_name = st.text_input("Last Name (required)", key="last_name")
-        national_id = st.text_input("National ID (required)", key="national_id")
+        national_id = st.text_input("National ID (required)", key="patient-national_id")
   with col4:
         mobile = st.text_input("Mobile Number (optional)", key='mobile')
         gender = st.selectbox("Gender (optional)", ["Male", "Female"], key='gender')
@@ -216,9 +233,10 @@ def hepatology_content():
   save_patient = st.button("Save Patient", key="save_patient")
   if save_patient:
         if national_id and patient_name :
+            st.write(national_id)
             cursor.execute("""
-            INSERT OR REPLACE INTO hepatology_patients 
-            (national_id, name, mobile, gender, age,department, report_date) 
+            INSERT OR REPLACE INTO hepatology_patients
+            (national_id, name, mobile, gender, age,department, report_date)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (national_id, patient_name, mobile, gender, age, "hepatology",
               datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
@@ -226,7 +244,7 @@ def hepatology_content():
             st.success(f"Saved {patient_name} information Successfully!")
         else:
             st.warning("Please complete patient personal information")
-  # User Input Section
+# User Input Section
   st.header("📝 Enter Patient Details")
 
   hepatomegaly_input = st.selectbox("Hepatomegaly (Liver Enlargement)", ["No", "Yes"])
@@ -259,29 +277,29 @@ def hepatology_content():
                                  "Confusion or memory problems (hepatic encephalopathy)",
                                  "Swelling in the legs and ankles",
                                  "Fever (in case of infection or inflammation)"
-                                     ]) 
+                                     ])
 
   # Prediction Section
   input_data = pd.DataFrame([[hepatomegaly, edema, bilirubin, albumin, platelets, prothrombin, N_Years]],
                                columns=["Hepatomegaly", "Edema", "Bilirubin", "Albumin", "Platelets", "Prothrombin", "N_Years"])
-    
+
   scaled_input = scaler.transform(input_data)
   prediction = model.predict(scaled_input)[0]
   stage_label = label_encoder.inverse_transform([prediction])[0]
-  report_txt = liver_report(first_name, last_name, id, mobile, gender, stage_label)
+  report_txt = liver_report(first_name, last_name, national_id, mobile, gender, stage_label)
 
   col5,col6 =st.columns(2)
   with col5:
    if st.button("Predict", key="predict_btn"):
-    
-    #show the report in markdown 
+
+    #show the report in markdown
     st.header( "🔍 Prediction Result")
     st.markdown("The model predicts the **stage of cirrhosis** based on the inputs provided.",unsafe_allow_html= True)
     report_txt =f"<div style = 'color : white;'>{report_txt}</div>"
     st.markdown(report_txt, unsafe_allow_html=True)
-           
 
-       
+
+
 
     st.markdown("\n🔢 **Patient Data Entered:**")
     st.dataframe(input_data.style.set_properties(**{"background-color": "#1E1E1E", "color": "#FFFFFF"}))
@@ -289,57 +307,60 @@ def hepatology_content():
      # Button to save Chest X ray report
       save_report = st.button("Save AI Report", key="save_report")
       if save_report:
-         if national_id and patient_name and report_txt is not None  :
-                   
+         if national_id  and patient_name and report_txt  :
+
                 report_file = convert_markdown_to_pdf(report_txt, national_id)
-          
+
                 # insert patient information and ECG REport in Cardiology table
                 cursor.execute("""
-                           INSERT OR REPLACE INTO hepatology_patients 
-                           (national_id, name, mobile, gender, age,department,report_pdf, report_date) 
+                           INSERT OR REPLACE INTO hepatology_patients
+                           (national_id, name, mobile, gender, age,department,report_pdf, report_date)
                             VALUES (?, ?, ?, ?, ?, ?, ?,?)
-                            """, (national_id, patient_name, mobile, gender, age, "hepatology",report_file, 
+                            """, (national_id, patient_name, mobile, gender, age, "hepatology",report_file,
                             datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')))
-              
+
                 conn.commit()
                 st.success(f" Report saved successfuly at :{report_file}")
-           
+
          else:
                   st.warning("please complete required data")
 
-  st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)            
-    
+  st.markdown('<h2 >🔍 Search for a Patien</h2>', unsafe_allow_html=True)
+
   search_id = st.text_input("Enter Patient ID to Retrieve Data",key ="search_id")
 
   liver_search = st.button("download AI Report", key="liver_search")
   if liver_search:
     if search_id:
-    
+
      cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
      result = cursor.fetchone()
-     #st.write("Debug: result =", result)
-     if result and os.path.exists(result[0]) and result[0]:
+     st.write("Debug: result =", result[0])
+     st.write("Debug: path =",  os.path.exists(result[0]))
+     if result is not None and os.path.exists(result[0]) is True :
             with open(result[0], "rb") as file:
                 st.download_button(label="📄 Download Report", data=file,file_name=f"liver_report_{search_id}.pdf", mime="application/pdf")
-       
+
      else :
-        st.warning("No patient found fot this ID")       
+        st.warning("No patient found fot this ID")
     else:
-        st.warning("Please enter PatientID") 
+        st.warning("Please enter PatientID")
 
  # Button for deleting patient
   if st.button("🗑 Delete Patient"):
     if search_id:
-     
+
       cursor.execute(f"SELECT report_pdf FROM {table} WHERE national_id=?", (search_id,))
       result = cursor.fetchone()
+      st.write("Debug: result =", result[0])
 
-      if result[0]:
-          chest_path = result[0]
-          
-          if os.path.exists(chest_path):
-                os.remove(chest_path)
-         
+      if result is not None:
+          liver_path = result[0]
+
+          if os.path.exists(liver_path) is pd.notnull and result is not None:
+                # Delete the PDF file
+                os.remove(liver_path)
+
                 # Delete patient from database
                 cursor.execute(f"DELETE FROM {table} WHERE national_id=?", (search_id,))
                 conn.commit()
@@ -347,15 +368,25 @@ def hepatology_content():
       else:
          st.error("❌ No patient found!")
     else:
-            st.warning("Please enter PatientID")        
+            st.warning("Please enter PatientID")
 
- # Add buttons to return to Clinics or Main
+# Add buttons to return to Clinics or Main
   st.markdown("---")
   col9, col10 ,col11= st.columns(3)
   with col11:
     if st.button(" 🏠 Go to home"):
-        st.session_state.page = "main"
-        st.rerun()
+        st.success("You opened  Home Page!")
+
+
+
+
+
+
+
+
+
+
+
 
 
 
