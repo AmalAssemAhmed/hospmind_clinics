@@ -376,6 +376,9 @@ def hepatology_content (liver_model,liver_scaler,liver_encoder):
   with col11:
     if st.button(" 🏠 Go to home"):
         st.success("You opened  Home Page!")
+        st.session_state.page = "main"
+        st.rerun()
+   
 
 
 
